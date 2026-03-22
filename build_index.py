@@ -21,12 +21,24 @@ def enhance_post(file_path):
             new_content
         )
             
-        # 避免重复注入导航框架
-        if '<!-- INJECTED_NAV_TOC -->' not in new_content:
-            # 注入的 HTML/JS/CSS
-            injected_html = """
+        # 让已注入的页面也能重新更新！把之前注入的统统去掉，重新插入
+        if '<!-- INJECTED_NAV_TOC -->' in new_content:
+            new_content = new_content.split('<!-- INJECTED_NAV_TOC -->')[0] + '</body>'
+
+        # 注入的 HTML/JS/CSS，加入 Google Fonts 以支持思源宋体
+        injected_html = """
 <!-- INJECTED_NAV_TOC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+/* 覆盖 Markdown 默认字体，配置为你要求的全局字体 */
+body, .markdown-preview.markdown-preview, .markdown-preview {
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", "Source Han Serif SC", serif !important;
+}
+
 /* 悬浮导航与目录样式 */
 .custom-floating-nav {
     position: fixed;
@@ -148,8 +160,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>"""
 
-            # 替换 </body> 为 注入内容 + </body>
-            new_content = new_content.replace('</body>', injected_html)
+        # 替换 </body> 为 注入内容 + </body>
+        new_content = new_content.replace('</body>', injected_html)
         
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(new_content)
@@ -210,6 +222,10 @@ def build_index():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculus's Math Notes</title>
+    <!-- 从 Google Fonts 引入思源宋体 (Noto Serif SC) 以保证所有用户都能在线看到极佳的排版字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {{
             --bg-color: #f8f9fa;
@@ -220,7 +236,8 @@ def build_index():
             --border-color: #dee2e6;
         }}
         body {{
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", "Source Han Serif SC", serif;
+            font-size: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
