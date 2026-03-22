@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
       
       
       
@@ -718,16 +718,18 @@ sidebarTOCBtn.addEventListener('click', function(event) {
   
     
 
+
+
+
+
+
 <!-- INJECTED_NAV_TOC -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 覆盖 Markdown 默认字体，配置为你要求的全局字体 */
+/* 覆盖 Markdown 默认字体，配置为你要求的全局字体， fallback 到各类系统的流畅字体 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
-    font-size: 20px !important;
-    line-height: 1.6 !important;
-    font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", "Source Han Serif SC", serif !important;
+    font-size: 20px;
+    line-height: 1.6;
+    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
 }
 
 /* 悬浮导航与目录样式 */

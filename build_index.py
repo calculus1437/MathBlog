@@ -14,10 +14,20 @@ def enhance_post(file_path):
             content = f.read()
 
         new_content = content
-        # 将依赖的本地插件资源替换成 CDN（这里以 KaTeX 为例），保证网页在线环境也能正常渲染
+        # 恢复使用稳定且不限制 CORS 的 cdnjs 或者 unpkg，避免 staticfile 的加载/阻塞问题
         new_content = re.sub(
             r'href="file:///[^"]+katex\.min\.css"',
-            r'href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"',
+            r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
+            new_content
+        )
+        new_content = re.sub(
+            r'href="https://cdn\.staticfile\.net/KaTeX/0\.16\.8/katex\.min\.css"',
+            r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
+            new_content
+        )
+        new_content = re.sub(
+            r'href="https://cdn\.jsdelivr\.net/npm/katex@0\.16\.8/dist/katex\.min\.css"',
+            r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
             new_content
         )
             
@@ -25,18 +35,15 @@ def enhance_post(file_path):
         if '<!-- INJECTED_NAV_TOC -->' in new_content:
             new_content = new_content.split('<!-- INJECTED_NAV_TOC -->')[0] + '</body>'
 
-        # 注入的 HTML/JS/CSS，加入 Google Fonts 以支持思源宋体
+        # 注入的 HTML/JS/CSS（已移除对国内访问较慢的外部字体链接，使用系统原生字体栈即刻渲染）
         injected_html = """
 <!-- INJECTED_NAV_TOC -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 覆盖 Markdown 默认字体，配置为你要求的全局字体 */
+/* 覆盖 Markdown 默认字体，配置为你要求的全局字体， fallback 到各类系统的流畅字体 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
-    font-size: 20px !important;
-    line-height: 1.6 !important;
-    font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", "Source Han Serif SC", serif !important;
+    font-size: 20px;
+    line-height: 1.6;
+    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
 }
 
 /* 悬浮导航与目录样式 */
@@ -222,10 +229,6 @@ def build_index():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculus's Math Notes</title>
-    <!-- 从 Google Fonts 引入思源宋体 (Noto Serif SC) 以保证所有用户都能在线看到极佳的排版字体 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {{
             --bg-color: #f8f9fa;
@@ -236,7 +239,8 @@ def build_index():
             --border-color: #dee2e6;
         }}
         body {{
-            font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", "Source Han Serif SC", serif;
+            /* 移除了庞大的在线字体，采用系统自带流畅字体链，保障手机端秒开 */
+            font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
             font-size: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
