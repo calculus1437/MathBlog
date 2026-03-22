@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>03_Understanding Analysis 习题解答 第三章</title>
+      <title>03_Understanding Analysis 习题解答 第三章 ℝ 的基本拓扑结构</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -725,13 +725,17 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
+
+
 <!-- INJECTED_NAV_TOC -->
 <style>
 /* 覆盖 Markdown 默认字体，配置为你要求的全局字体， fallback 到各类系统的流畅字体 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
     line-height: 1.6;
-    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
+    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
 }
 
 /* 悬浮导航与目录样式 */
@@ -795,10 +799,30 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
 .custom-floating-nav a.toc-link:hover {
     color: #228ae6;
 }
-/* 响应式，小屏幕隐藏或变成按钮 */
+/* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
 @media (max-width: 1200px) {
     .custom-floating-nav {
-        display: none;
+        top: auto;
+        bottom: 30px;
+        right: 20px;
+        width: auto;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+    .custom-floating-nav h3,
+    .custom-floating-nav ul,
+    .custom-floating-nav p {
+        display: none; /* 手机上隐藏目录主体 */
+    }
+    .custom-floating-nav .home-btn {
+        margin-bottom: 0;
+        width: auto;
+        padding: 12px 24px;
+        border-radius: 50px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        font-size: 16px;
     }
 }
 </style>
@@ -835,7 +859,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const a = document.createElement('a');
         a.href = '#' + h.id;
         a.className = 'toc-link';
-        a.textContent = h.textContent;
+        // 使用 innerHTML 使得数学公式（如 KaTeX 生成的 span）能在目录中正常渲染显示
+        a.innerHTML = h.innerHTML;
         li.appendChild(a);
         ul.appendChild(li);
     });
