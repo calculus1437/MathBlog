@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.38/dist/katex.min.css">
       
       
       
@@ -85,6 +85,14 @@
   .markdown-preview.markdown-preview .admonition.question .admonition-title {
     background-color: #bbdefb !important;
   }
+}
+/* 限制公式和代码块的宽度并在内部出现滚动条，不破坏外层容器 */
+.markdown-preview.markdown-preview .admonition .katex-display,
+.markdown-preview.markdown-preview .admonition mjx-container[display="true"],
+.markdown-preview.markdown-preview .admonition pre {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
 }
 </style></p>
 <p><a href="#8">9.压缩映射定理与不动点收敛问题</a>(4.3.9)<br>
@@ -1306,22 +1314,6 @@ sidebarTOCBtn.addEventListener('click', function(event) {
       
   
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
