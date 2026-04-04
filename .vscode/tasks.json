@@ -1,0 +1,141 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Blog",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build Clean Blog",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Get Template",
+			"type": "shell",
+			"command": "python -c \"content=open('build_index.py','r',encoding='utf-8').read(); idx=content.find('html_template ='); print(content[idx:idx+1500])\"",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run test3",
+			"type": "shell",
+			"command": "python test3.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test4",
+			"type": "shell",
+			"command": "python test4.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test5",
+			"type": "shell",
+			"command": "python test5.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Build with Dark Mode",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run test6",
+			"type": "shell",
+			"command": "python test6.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test7",
+			"type": "shell",
+			"command": "python test7.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test8",
+			"type": "shell",
+			"command": "python test8.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test9",
+			"type": "shell",
+			"command": "python test9.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test10",
+			"type": "shell",
+			"command": "python test10.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test11",
+			"type": "shell",
+			"command": "python test11.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test12",
+			"type": "shell",
+			"command": "python test12.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test13",
+			"type": "shell",
+			"command": "python test13.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Build Final",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Update CSS",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
