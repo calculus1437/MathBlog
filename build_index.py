@@ -46,7 +46,7 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
     line-height: 1.6;
     font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
-    font-weight: 400; /* 强制统一为 Regular 字重 */
+    font-weight: 500; /* 全局统一使用 Medium 字重 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -157,9 +157,6 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
 }
 /* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
 @media (max-width: 1200px) {
-    body, .markdown-preview.markdown-preview, .markdown-preview {
-        font-weight: 500; /*在移动设备屏幕上应用 Medium 字重*/
-    }
     .custom-floating-nav.minimized {
         bottom: 30px;
         right: 20px;
@@ -349,7 +346,7 @@ def build_index():
         body {{
             /* 仅在本地思源宋体和分包在线字体中选择 */
             font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
-            font-weight: 400; /* 强制统一为 Regular 字重 */
+            font-weight: 500; /* 全局统一使用 Medium 字重 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             font-size: 20px;
@@ -404,7 +401,6 @@ def build_index():
         }}
         @media (max-width: 600px) {{
             body {{
-                font-weight: 500; /*在移动设备屏幕上应用 Medium 字重*/
                 padding: 1rem;
             }}
             .post-item {{
