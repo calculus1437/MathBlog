@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>calculus_1437's Math Notes</title>
+    <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
+    <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f8f9fa;
@@ -14,8 +16,8 @@
             --border-color: #dee2e6;
         }
         body {
-            /* 移除庞大的在线字体，采用系统自带流畅字体链 */
-            font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+            /* 采用字体切片技术的高可用在线思源宋体，并 fallback 到系统自带字体链 */
+            font-family: "Noto Serif SC", "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
             font-weight: 500;
             -webkit-font-smoothing: antialiased;
             text-shadow: 0 0 0.1px rgba(0,0,0,0.3);
