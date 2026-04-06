@@ -136,6 +136,118 @@
 			"isBackground": false,
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "Patch TOC",
+			"type": "shell",
+			"command": "python patch_toc.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build Site",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run test syntax",
+			"type": "shell",
+			"command": "python test_syntax.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax2",
+			"type": "shell",
+			"command": "python test_syntax2.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 3",
+			"type": "shell",
+			"command": "python test_syntax3.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 4",
+			"type": "shell",
+			"command": "python test_syntax4.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 5",
+			"type": "shell",
+			"command": "python test_syntax5.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 6",
+			"type": "shell",
+			"command": "python test_syntax6.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 7",
+			"type": "shell",
+			"command": "python test_syntax7.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 8",
+			"type": "shell",
+			"command": "python test_syntax8.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 9",
+			"type": "shell",
+			"command": "python test_syntax9.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 10",
+			"type": "shell",
+			"command": "python test_syntax10.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run test syntax 11",
+			"type": "shell",
+			"command": "python test_syntax11.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "run syntax",
+			"type": "shell",
+			"command": "python build_index.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }
