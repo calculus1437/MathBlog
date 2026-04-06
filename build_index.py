@@ -46,6 +46,7 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
     line-height: 1.6;
     font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
+    font-weight: 400; /* 强制统一为 Regular 字重 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -345,6 +346,7 @@ def build_index():
         body {{
             /* 仅在本地思源宋体和分包在线字体中选择 */
             font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
+            font-weight: 400; /* 强制统一为 Regular 字重 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             font-size: 20px;
