@@ -45,7 +45,7 @@ def enhance_post(file_path):
 body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
     line-height: 1.6;
-    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
 }
 
 /* 悬浮导航与目录样式 */
@@ -342,7 +342,7 @@ def build_index():
         }}
         body {{
             /* 优先采用本地思源宋体，并 fallback 到在线字体切片和系统自带字体链 */
-            font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+            font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
             font-size: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
