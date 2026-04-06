@@ -45,7 +45,10 @@ def enhance_post(file_path):
 body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
     line-height: 1.6;
-    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+    font-family: "Noto Serif SC", "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+    font-weight: 500;              /* 提升字重（从默认 400 提升到 500），解决手机宋体过细的问题 */
+    -webkit-font-smoothing: antialiased; /* 在 Mac/iOS 上让字体更平滑清晰 */
+    text-shadow: 0 0 0.1px rgba(0,0,0,0.3); /* 模拟纸质印刷时的油墨晕染（防发虚）*/
 }
 
 /* 悬浮导航与目录样式 */
@@ -342,7 +345,10 @@ def build_index():
         }}
         body {{
             /* 采用字体切片技术的高可用在线思源宋体，并 fallback 到系统自带字体链 */
-            font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+            font-family: "Noto Serif SC", "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif CJK SC", "STSong", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+            font-weight: 500;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: 0 0 0.1px rgba(0,0,0,0.3);
             font-size: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
