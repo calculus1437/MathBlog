@@ -189,6 +189,10 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
+
+
 <!-- INJECTED_NAV_TOC -->
 <style>
 /* 覆盖 Markdown 默认字体，配置为你要求的全局字体， fallback 到各类系统的流畅字体 */
@@ -216,6 +220,49 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
     padding: 15px;
     z-index: 9999;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.custom-floating-nav.minimized {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.custom-floating-nav.minimized > *:not(.nav-minimize-btn) {
+    display: none !important;
+}
+.custom-floating-nav .nav-minimize-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #888;
+    padding: 4px;
+    line-height: 1;
+    border-radius: 4px;
+}
+.custom-floating-nav .nav-minimize-btn:hover {
+    color: #333;
+    background: #f0f0f0;
+}
+.custom-floating-nav.minimized .nav-minimize-btn {
+    position: static;
+    font-size: 24px;
+    color: #228ae6;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .custom-floating-nav .home-btn {
     display: inline-block;
@@ -264,6 +311,14 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
 }
 /* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
 @media (max-width: 1200px) {
+    .custom-floating-nav.minimized {
+        bottom: 30px;
+        right: 20px;
+        top: auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+    }
     .custom-floating-nav {
         top: auto;
         bottom: 30px;
@@ -296,6 +351,32 @@ document.addEventListener("DOMContentLoaded", function() {
     const nav = document.createElement('div');
     nav.className = 'custom-floating-nav';
     
+    // 最小化按钮
+    const minBtn = document.createElement('button');
+    minBtn.className = 'nav-minimize-btn';
+    minBtn.innerHTML = '➖';
+    minBtn.title = '收起目录';
+    minBtn.onclick = function(e) {
+        e.stopPropagation();
+        if (nav.classList.contains('minimized')) {
+            nav.classList.remove('minimized');
+            minBtn.innerHTML = '➖';
+            minBtn.title = '收起目录';
+        } else {
+            nav.classList.add('minimized');
+            minBtn.innerHTML = '📑';
+            minBtn.title = '展开目录';
+        }
+    };
+    nav.onclick = function() {
+        if (nav.classList.contains('minimized')) {
+            nav.classList.remove('minimized');
+            minBtn.innerHTML = '➖';
+            minBtn.title = '收起目录';
+        }
+    };
+    nav.appendChild(minBtn);
+
     // 返回主页按钮
     const homeBtn = document.createElement('a');
     homeBtn.href = '../index.html';
