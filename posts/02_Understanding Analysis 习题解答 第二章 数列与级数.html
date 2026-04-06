@@ -1832,6 +1832,7 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
 <!-- INJECTED_NAV_TOC -->
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1952,6 +1953,9 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
 }
 /* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
 @media (max-width: 1200px) {
+    body, .markdown-preview.markdown-preview, .markdown-preview {
+        font-weight: 500; /*在移动设备屏幕上应用 Medium 字重*/
+    }
     .custom-floating-nav.minimized {
         bottom: 30px;
         right: 20px;

@@ -157,6 +157,9 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
 }
 /* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
 @media (max-width: 1200px) {
+    body, .markdown-preview.markdown-preview, .markdown-preview {
+        font-weight: 500; /*在移动设备屏幕上应用 Medium 字重*/
+    }
     .custom-floating-nav.minimized {
         bottom: 30px;
         right: 20px;
@@ -400,13 +403,14 @@ def build_index():
             text-decoration: underline;
         }}
         @media (max-width: 600px) {{
+            body {{
+                font-weight: 500; /*在移动设备屏幕上应用 Medium 字重*/
+                padding: 1rem;
+            }}
             .post-item {{
                 flex-direction: column;
                 gap: 0.25rem;
                 margin-bottom: 2rem;
-            }}
-            body {{
-                padding: 1rem;
             }}
         }}
     </style>

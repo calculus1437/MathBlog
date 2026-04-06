@@ -72,13 +72,14 @@
             text-decoration: underline;
         }
         @media (max-width: 600px) {
+            body {
+                font-weight: 500; /*在移动设备屏幕上应用 Medium 字重*/
+                padding: 1rem;
+            }
             .post-item {
                 flex-direction: column;
                 gap: 0.25rem;
                 margin-bottom: 2rem;
-            }
-            body {
-                padding: 1rem;
             }
         }
     </style>
