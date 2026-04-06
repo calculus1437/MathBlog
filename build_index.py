@@ -41,11 +41,11 @@ def enhance_post(file_path):
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* 覆盖 Markdown 默认字体，优先使用本地字体， fallback 到分包在线字体和各类系统的流畅字体 */
+/* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
     line-height: 1.6;
-    font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
+    font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
 }
 
 /* 悬浮导航与目录样式 */
@@ -341,8 +341,8 @@ def build_index():
             --border-color: #dee2e6;
         }}
         body {{
-            /* 优先采用本地思源宋体，并 fallback 到在线字体切片和系统自带字体链 */
-            font-family: "Source Han Serif SC VF Regular", "Source Han Serif SC", "Noto Serif SC", "Noto Serif CJK SC", "PingFang SC", "Microsoft YaHei", serif;
+            /* 仅在本地思源宋体和分包在线字体中选择 */
+            font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
             font-size: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
