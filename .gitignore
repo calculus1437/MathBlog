@@ -12,4 +12,3 @@
 # 保留根目录下的特定文件
 !build_index.py
 !index.html
-!test_css.css
