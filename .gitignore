@@ -1,3 +1,15 @@
-BingSiteAuth.xml
+﻿# 忽略根目录的所有文件和文件夹
+/*
 
-scripts/
+# 避免忽略 .gitignore 自身
+!.gitignore
+
+# 保留特定文件夹（加/解禁该文件夹，其内部所有文件都将生效追踪）
+!.vscode/
+!images/
+!posts/
+
+# 保留根目录下的特定文件
+!build_index.py
+!index.html
+!test_css.css
