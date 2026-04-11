@@ -1090,6 +1090,9 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
+
 <!-- INJECTED_NAV_TOC -->
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1353,21 +1356,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const gitalk = new Gitalk({
-        clientID: 'Ov23liom9xQu3sAdxf6X', 
-        clientSecret: '1b47474c7b40af8af53f9ae9c47c8775f92fd7a7',
-        repo: 'calculus1437.github.io',
-        owner: 'calculus1437',
-        admin: ['calculus1437'],
-        // 覆盖默认已失效的跨域代理，解决 Network Error，更换为目前最稳定的反代节点
-        proxy: 'https://netnr-proxy.tc.htv.im/https://github.com/login/oauth/access_token',
+document.addEventListener("DOMContentLoaded", function() {{
+    const gitalk = new Gitalk({{
+        clientID: '{SITE_CONFIG.get('gitalk_clientID', '')}', 
+        clientSecret: '{SITE_CONFIG.get('gitalk_clientSecret', '')}',
+        repo: '{SITE_CONFIG.get('gitalk_repo', '')}',
+        owner: '{SITE_CONFIG.get('gitalk_owner', '')}',
+        admin: {json.dumps(SITE_CONFIG.get('gitalk_admin', []))},
+        proxy: '{SITE_CONFIG.get('gitalk_proxy', 'https://cors-server.codingme.net/https://github.com/login/oauth/access_token')}',
         // 这里提前解码以防 location 提取出含有 % 的过长中文字符串，防止 GitHub Issue Label 因为超长报 422 错误
         id: decodeURI(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)).substring(0, 50),
         distractionFreeMode: false
-    });
+    }});
     gitalk.render('gitalk-container');
-});
+}});
 </script>
 
 <footer style="text-align: center; margin-top: 5rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid #eee; width: 100%;">

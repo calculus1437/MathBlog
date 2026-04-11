@@ -1,7 +1,47 @@
-import os
+﻿import os
 import re
 import json
 from datetime import datetime
+
+# 简易解析 _config.yml
+def load_config():
+    config = {
+        'title': "calculus_1437's Math Notes",
+        'description': "纯净的 HTML 数学笔记博客",
+        'gitalk_clientID': '',
+        'gitalk_clientSecret': '',
+        'gitalk_repo': '',
+        'gitalk_owner': '',
+        'gitalk_admin': [],
+        'gitalk_proxy': ''
+    }
+    if not os.path.exists('_config.yml'): return config
+    
+    current_list_key = None
+    with open('_config.yml', 'r', encoding='utf-8') as f:
+        for line in f:
+            stripped = line.strip()
+            if not stripped or stripped.startswith('#'): continue
+            
+            # 解析列表项 (例如: - calculus1437)
+            if stripped.startswith('- ') and current_list_key:
+                config[current_list_key].append(stripped[2:].strip().strip("'\""))
+                continue
+                
+            if ':' in stripped:
+                k, v = stripped.split(':', 1)
+                k = k.strip()
+                v = v.strip().strip("'\"")
+                if not v:
+                    # 值为空表示接下来是列表
+                    config[k] = []
+                    current_list_key = k
+                else:
+                    config[k] = v
+                    current_list_key = None
+    return config
+
+SITE_CONFIG = load_config()
 
 # 配置路径
 POSTS_DIR = 'posts'
@@ -301,21 +341,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const gitalk = new Gitalk({
-        clientID: 'Ov23liom9xQu3sAdxf6X', 
-        clientSecret: '1b47474c7b40af8af53f9ae9c47c8775f92fd7a7',
-        repo: 'calculus1437.github.io',
-        owner: 'calculus1437',
-        admin: ['calculus1437'],
-        // 覆盖默认已失效的跨域代理，解决 Network Error，更换为目前最稳定的反代节点
-        proxy: 'https://netnr-proxy.tc.htv.im/https://github.com/login/oauth/access_token',
+document.addEventListener("DOMContentLoaded", function() {{
+    const gitalk = new Gitalk({{
+        clientID: '{SITE_CONFIG.get('gitalk_clientID', '')}', 
+        clientSecret: '{SITE_CONFIG.get('gitalk_clientSecret', '')}',
+        repo: '{SITE_CONFIG.get('gitalk_repo', '')}',
+        owner: '{SITE_CONFIG.get('gitalk_owner', '')}',
+        admin: {json.dumps(SITE_CONFIG.get('gitalk_admin', []))},
+        proxy: '{SITE_CONFIG.get('gitalk_proxy', 'https://cors-server.codingme.net/https://github.com/login/oauth/access_token')}',
         // 这里提前解码以防 location 提取出含有 % 的过长中文字符串，防止 GitHub Issue Label 因为超长报 422 错误
         id: decodeURI(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)).substring(0, 50),
         distractionFreeMode: false
-    });
+    }});
     gitalk.render('gitalk-container');
-});
+}});
 </script>
 
 <footer style="text-align: center; margin-top: 5rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid #eee; width: 100%;">
@@ -419,7 +458,7 @@ def build_index():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calculus_1437's Math Notes</title>
+    <title>{SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</title>
     <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -515,8 +554,8 @@ def build_index():
 </head>
 <body>
     <header>
-        <h1>calculus_1437's Math Notes</h1>
-        <p class="description">纯净的 HTML 数学笔记博客</p>
+        <h1>{SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</h1>
+        <p class="description">{SITE_CONFIG.get('description', '纯净的 HTML 数学笔记博客')}</p>
         <div class="nav-links">
             <a href="index.html">🏠 首页</a>
             <a href="category.html">🏷️ 分类</a>
@@ -586,7 +625,7 @@ def build_category(posts_data):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>分类 - calculus_1437's Math Notes</title>
+    <title>分类 - {SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</title>
     <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -712,8 +751,8 @@ def build_category(posts_data):
 </head>
 <body>
     <header>
-        <h1>calculus_1437's Math Notes</h1>
-        <p class="description">纯净的 HTML 数学笔记博客</p>
+        <h1>{SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</h1>
+        <p class="description">{SITE_CONFIG.get('description', '纯净的 HTML 数学笔记博客')}</p>
         <div class="nav-links">
             <a href="index.html">🏠 首页</a>
             <a href="category.html">🏷️ 分类</a>
@@ -759,7 +798,7 @@ def build_about():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于 - calculus_1437's Math Notes</title>
+    <title>关于 - {SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</title>
     <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- KaTeX 支持 (解决公式渲染) -->
@@ -837,8 +876,8 @@ def build_about():
 </head>
 <body>
     <header>
-        <h1>calculus_1437's Math Notes</h1>
-        <p class="description">纯净的 HTML 数学笔记博客</p>
+        <h1>{SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</h1>
+        <p class="description">{SITE_CONFIG.get('description', '纯净的 HTML 数学笔记博客')}</p>
         <div class="nav-links">
             <a href="index.html">🏠 首页</a>
             <a href="category.html">🏷️ 分类</a>
