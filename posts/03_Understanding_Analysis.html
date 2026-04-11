@@ -788,6 +788,7 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
 <!-- INJECTED_NAV_TOC -->
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1048,8 +1049,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <!-- Gitalk 评论区容器及资源引入 -->
 <div id="gitalk-container" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const gitalk = new Gitalk({
@@ -1059,9 +1060,8 @@ document.addEventListener("DOMContentLoaded", function() {
         owner: 'calculus1437',
         admin: ["calculus1437"],
         proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
-        // 这里提前解码以防 location 提取出含有 % 的过长中文字符串，防止 GitHub Issue Label 因为超长报 422 错误
-        id: decodeURI(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)).substring(0, 50),
-        distractionFreeMode: false
+        id: decodeURI(location.pathname).substring(0, 50),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
     });
     gitalk.render('gitalk-container');
 });
