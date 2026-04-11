@@ -308,8 +308,8 @@ document.addEventListener("DOMContentLoaded", function() {
         repo: 'calculus1437.github.io',
         owner: 'calculus1437',
         admin: ['calculus1437'],
-        // 覆盖默认已失效的跨域代理，解决 Network Error
-        proxy: 'https://cors-server.codingme.net/https://github.com/login/oauth/access_token',
+        // 覆盖默认已失效的跨域代理，解决 Network Error，更换为目前最稳定的反代节点
+        proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
         // 这里提前解码以防 location 提取出含有 % 的过长中文字符串，防止 GitHub Issue Label 因为超长报 422 错误
         id: decodeURI(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)).substring(0, 50),
         distractionFreeMode: false
