@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - calculus_1437's Math Notes</title>
+    <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
+    <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- KaTeX 支持 (解决公式渲染) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --link-color: #228ae6;
+            --link-hover: #1b6ec2;
+            --date-color: #868e96;
+            --border-color: #dee2e6;
+        }
+        body {
+            /* 仅在本地思源宋体和分包在线字体中选择 */
+            font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
+            font-weight: 500; /* 全局统一使用 Medium 字重 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #212529;
+        }
+        .description {
+            color: var(--date-color);
+            font-size: 1.1rem;
+        }
+        .nav-links {
+            margin-top: 1rem;
+        }
+        .nav-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--link-hover);
+        }
+        .content {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        /* Markdown 常用样式 */
+        .content h1, .content h2, .content h3 { color: #222; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+        .content a { color: var(--link-color); text-decoration: none; }
+        .content blockquote { border-left: 4px solid #ddd; margin: 0; padding-left: 1rem; color: #666; }
+        .content code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        .content pre { background: #f4f4f4; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+        .content img { max-width: 100%; height: auto; }
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>calculus_1437's Math Notes</h1>
+        <p class="description">纯净的 HTML 数学笔记博客</p>
+        <div class="nav-links">
+            <a href="index.html">🏠 首页</a>
+            <a href="category.html">🏷️ 分类</a>
+            <a href="about.html">ℹ️ 关于</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="content" id="md-content">
+            加载中... (正在联网获取 marked.js 解析引擎)
+        </div>
+    </main>
+
+    <footer style="text-align: center; margin-top: 3rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid var(--border-color);">
+        Copyright 2026 HuangTianye 版权所有
+    </footer>
+
+    <!-- 纯前端渲染 Markdown 方案引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
+    
+    <script>
+        // 把 Markdown 源文件内容作为一个安全的 JSON 字符串传入
+        const rawMd = "\u4f60\u597d\uff01\u8fd9\u662f\u6211\u7684\u4e2a\u4eba\u7f51\u9875\uff0c\u6211\u4f1a\u5c06\u6211\u7684\u4e00\u4e9b\u6570\u5b66\u89e3\u7b54\u653e\u7f6e\u4e8e\u6b64\u3002\n\n## \u57fa\u672c\u529f\u80fd\n\n- \u6d6e\u52a8\u76ee\u5f55\uff1a\u8f83\u957f\u7684\u6587\u7ae0\u5728\u9875\u9762\u53f3\u4fa7\u4f1a\u6709\u4e00\u4e2a\u6d6e\u52a8\u76ee\u5f55\uff0c\u65b9\u4fbf\u8df3\u8f6c\uff1b\n\n\u76ee\u5f55\u7684\u53f3\u4e0a\u89d2\u6709\u4e00\u4e2a\u6536\u8d77\u6309\u952e\uff0c\u53ef\u4ee5\u9690\u85cf\u76ee\u5f55\uff0c\u907f\u514d\u76ee\u5f55\u906e\u6321\u6b63\u6587\u7684\u60c5\u51b5\u3002\n\n- \u6807\u7b7e\u5206\u7c7b\uff1a\u5728\u201c\u5206\u7c7b\u201d\u4e00\u680f\u4e2d\u53ef\u4ee5\u770b\u5230\u4e0d\u540c\u6807\u7b7e\u4e0b\u5206\u7c7b\u7684\u6587\u7ae0\uff0c\u65b9\u4fbf\u67e5\u627e\u3002\n\n## \u6e29\u99a8\u63d0\u9192\n\u5728\u79fb\u52a8\u7aef\u4e0a\u9605\u8bfb\u53ef\u80fd\u4f1a\u6709\u683c\u5f0f\u95ee\u9898\uff0c\u5efa\u8bae\u5728\u7535\u8111\u4e0a\u9605\u8bfb\u3002\n\n## \u81f4\u8c22\nPianfan\uff0c\u521d\u7248\u7f51\u7ad9\u53c2\u8003\u4e86\u4ed6\u7684\u6587\u7ae0 [\u96f6\u57fa\u7840\u5c0f\u767d\u5982\u4f55\u642d\u5efa\u81ea\u5df1\u7684 github.io \u4e2a\u4eba\u7f51\u7ad9](https://pianfan.github.io/build_own_website/) \uff08\u521d\u7248\u73b0\u5df2\u5220\u9664\uff09\n\nZhou\uff0c[\u5229\u7528github.io\u5feb\u901f\u62e5\u6709\u81ea\u5df1\u7684\u7b2c\u4e00\u4e2a\u514d\u8d39\u4e2a\u4eba\u4e3b\u9875](https://zhuanlan.zhihu.com/p/36912355)\uff0c\u63d0\u4f9b\u4e86\u7f51\u7ad9\u4e3b\u9875\u7684\u6784\u5efa\u65b9\u6cd5\u3002\n\nGemini 3.1 Pro\uff0c\u63d0\u4f9b\u4e86\u51e0\u4e4e\u6240\u6709\u7f51\u7ad9\u6e90\u4ee3\u7801\u7684\u7f16\u5199\u4e0e\u8c03\u8bd5\u5de5\u4f5c\u3002\n\n## \u7f51\u7ad9\u6e90\u7801\nhttps://github.com/calculus1437/MathBlog\n\n## \u7248\u6743\u58f0\u660e\n\u672c\u7f51\u9875\u6587\u7ae0\u5747\u4e3a\u6211\u539f\u521b\u4f5c\u54c1\uff0c\u672a\u7ecf\u6388\u6743\u7981\u6b62\u8f6c\u8f7d\u3002";
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            // 解析 Markdown
+            document.getElementById('md-content').innerHTML = marked.parse(rawMd);
+            
+            // 渲染数学公式 KaTeX
+            if (window.renderMathInElement) {
+                renderMathInElement(document.getElementById('md-content'), {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ],
+                    throwOnError : false
+                });
+            }
+        });
+    </script>
+</body>
+</html>

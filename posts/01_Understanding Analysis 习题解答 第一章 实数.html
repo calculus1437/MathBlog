@@ -1,5 +1,6 @@
 <!DOCTYPE html><html><head>
       <title>01_Understanding Analysis 习题解答 第一章 实数</title>
+      <!-- tags: Understanding analysis -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -1065,6 +1066,18 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- INJECTED_NAV_TOC -->
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1138,23 +1151,30 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
     align-items: center;
     justify-content: center;
 }
-.custom-floating-nav .home-btn {
-    display: inline-block;
+.custom-floating-nav .nav-btns {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.custom-floating-nav .home-btn, .custom-floating-nav .about-btn, .custom-floating-nav .category-btn {
+    flex: 1;
     background: #228ae6;
     color: #fff;
-    padding: 8px 12px;
+    padding: 8px 10px;
     border-radius: 4px;
     text-decoration: none;
     font-size: 14px;
-    margin-bottom: 15px;
     font-weight: bold;
     text-align: center;
-    width: calc(100% - 24px);
     transition: background 0.2s;
+    box-sizing: border-box;
 }
-.custom-floating-nav .home-btn:hover {
-    background: #1b6ec2;
-}
+.custom-floating-nav .home-btn:hover { background: #1b6ec2; }
+.custom-floating-nav .category-btn { background: #f06595; }
+.custom-floating-nav .category-btn:hover { background: #d6336c; }
+.custom-floating-nav .about-btn { background: #40c057; }
+.custom-floating-nav .about-btn:hover { background: #2f9e44; }
 .custom-floating-nav h3 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -1208,10 +1228,12 @@ body, .markdown-preview.markdown-preview, .markdown-preview {
     .custom-floating-nav p {
         display: none; /* 手机上隐藏目录主体 */
     }
-    .custom-floating-nav .home-btn {
+    .custom-floating-nav .nav-btns {
         margin-bottom: 0;
         width: auto;
-        padding: 12px 24px;
+    }
+    .custom-floating-nav .home-btn, .custom-floating-nav .about-btn, .custom-floating-nav .category-btn {
+        padding: 12px 20px;
         border-radius: 50px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         font-size: 16px;
@@ -1251,12 +1273,29 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     nav.appendChild(minBtn);
 
-    // 返回主页按钮
+    // 导航按钮组
+    const navGroup = document.createElement('div');
+    navGroup.className = 'nav-btns';
+    
     const homeBtn = document.createElement('a');
     homeBtn.href = '../index.html';
     homeBtn.className = 'home-btn';
-    homeBtn.innerHTML = '← 返回主页';
-    nav.appendChild(homeBtn);
+    homeBtn.innerHTML = '🏠 首页';
+    navGroup.appendChild(homeBtn);
+
+    const categoryBtn = document.createElement('a');
+    categoryBtn.href = '../category.html';
+    categoryBtn.className = 'category-btn';
+    categoryBtn.innerHTML = '🏷️ 分类';
+    navGroup.appendChild(categoryBtn);
+
+    const aboutBtn = document.createElement('a');
+    aboutBtn.href = '../about.html';
+    aboutBtn.className = 'about-btn';
+    aboutBtn.innerHTML = 'ℹ️ 关于';
+    navGroup.appendChild(aboutBtn);
+    
+    nav.appendChild(navGroup);
     
     // 目录标题
     const tocTitle = document.createElement('h3');
@@ -1296,4 +1335,27 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.appendChild(nav);
 });
 </script>
+
+<!-- Gitalk 评论区容器及资源引入 -->
+<div id="gitalk-container" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const gitalk = new Gitalk({
+        clientID: 'YOUR_GITHUB_CLIENT_ID', // 替换为你的 GitHub Client ID
+        clientSecret: 'YOUR_GITHUB_CLIENT_SECRET', // 替换为你的 GitHub Client Secret
+        repo: 'YOUR_GITHUB_REPO', // 用于存放评论的仓库名，比如 'MathBlog'
+        owner: 'calculus-1437', // 你的 GitHub 用户名
+        admin: ['calculus-1437'], // 可以初始化评论的管理员用户名列表
+        id: location.pathname.substring(location.pathname.lastIndexOf('/') + 1, location.pathname.lastIndexOf('/') + 51), // 页面唯一标识
+        distractionFreeMode: false // 类似 Facebook 评论框的全屏遮罩效果
+    });
+    gitalk.render('gitalk-container');
+});
+</script>
+
+<footer style="text-align: center; margin-top: 5rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid #eee; width: 100%;">
+    Copyright 2026 HuangTianye 版权所有
+</footer>
 </body>

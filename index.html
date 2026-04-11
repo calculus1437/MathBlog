@@ -44,6 +44,20 @@
             color: var(--date-color);
             font-size: 1.1rem;
         }
+        .nav-links {
+            margin-top: 1rem;
+        }
+        .nav-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--link-hover);
+        }
         .post-list {
             list-style: none;
             padding: 0;
@@ -69,7 +83,7 @@
         }
         .post-link:hover {
             color: var(--link-hover);
-            text-decoration: underline;
+            text-decoration: none;
         }
         @media (max-width: 600px) {
             body {
@@ -87,36 +101,45 @@
     <header>
         <h1>calculus_1437's Math Notes</h1>
         <p class="description">纯净的 HTML 数学笔记博客</p>
+        <div class="nav-links">
+            <a href="index.html">🏠 首页</a>
+            <a href="category.html">🏷️ 分类</a>
+            <a href="about.html">ℹ️ 关于</a>
+        </div>
     </header>
-    
+
     <main>
         <ul class="post-list">
             
             <li class="post-item">
-                <span class="post-date">2026-04-07</span>
+                <span class="post-date">2026-04-11</span>
                 <a class="post-link" href="posts/01_Understanding Analysis 习题解答 第一章 实数.html">01_Understanding Analysis 习题解答 第一章 实数</a>
             </li>
             <li class="post-item">
-                <span class="post-date">2026-04-07</span>
+                <span class="post-date">2026-04-11</span>
                 <a class="post-link" href="posts/02_Understanding Analysis 习题解答 第二章 数列与级数.html">02_Understanding Analysis 习题解答 第二章 数列与级数</a>
             </li>
             <li class="post-item">
-                <span class="post-date">2026-04-07</span>
+                <span class="post-date">2026-04-11</span>
                 <a class="post-link" href="posts/03_Understanding Analysis 习题解答 第三章 实数集基本拓扑.html">03_Understanding Analysis 习题解答 第三章 R 的基本拓扑结构</a>
             </li>
             <li class="post-item">
-                <span class="post-date">2026-04-07</span>
+                <span class="post-date">2026-04-11</span>
                 <a class="post-link" href="posts/04_Understanding Analysis 习题解答 第四章 函数极限与连续性.html">04_Understanding Analysis 习题解答 第四章 函数极限与连续性</a>
             </li>
             <li class="post-item">
-                <span class="post-date">2026-04-07</span>
+                <span class="post-date">2026-04-11</span>
                 <a class="post-link" href="posts/05_Understanding Analysis 习题解答 第五章 导数.html">05_Understanding Analysis 习题解答 第五章 导数</a>
             </li>
             <li class="post-item">
-                <span class="post-date">2026-04-09</span>
+                <span class="post-date">2026-04-11</span>
                 <a class="post-link" href="posts/小甜点.html">小甜点</a>
             </li>
         </ul>
     </main>
+
+    <footer style="text-align: center; margin-top: 3rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid var(--border-color);">
+        Copyright 2026 HuangTianye 版权所有
+    </footer>
 </body>
 </html>

@@ -12,3 +12,6 @@
 # 保留根目录下的特定文件
 !build_index.py
 !index.html
+!about.html
+!category.html
+!readme.md
