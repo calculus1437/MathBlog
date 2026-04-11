@@ -10,4 +10,3 @@ gitalk_repo: calculus1437.github.io
 gitalk_owner: calculus1437
 gitalk_admin:
   - calculus1437
-gitalk_proxy: https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token
