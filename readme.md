@@ -19,7 +19,7 @@ Zhou，[利用github.io快速拥有自己的第一个免费个人主页](https:/
 Gemini 3.1 Pro，提供了几乎所有网站源代码的编写与调试工作。
 
 ## 网站源码
-https://github.com/calculus1437/MathBlog
+https://github.com/calculus1437/calculus1437.github.io
 
 ## 版权声明
 本网页文章均为我原创作品，未经授权禁止转载。
