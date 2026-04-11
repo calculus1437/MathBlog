@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function() {
         repo: '""" + SITE_CONFIG.get('gitalk_repo', '') + """',
         owner: '""" + SITE_CONFIG.get('gitalk_owner', '') + """',
         admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """,
-        proxy: '""" + SITE_CONFIG.get('gitalk_proxy', 'https://cors-server.codingme.net/https://github.com/login/oauth/access_token') + """',
+        proxy: '""" + SITE_CONFIG.get('gitalk_proxy', 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token') + """',
         id: decodeURI(location.pathname).substring(0, 50),      // Ensure uniqueness and length less than 50
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
