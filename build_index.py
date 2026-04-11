@@ -341,20 +341,20 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {{
-    const gitalk = new Gitalk({{
-        clientID: '{SITE_CONFIG.get('gitalk_clientID', '')}', 
-        clientSecret: '{SITE_CONFIG.get('gitalk_clientSecret', '')}',
-        repo: '{SITE_CONFIG.get('gitalk_repo', '')}',
-        owner: '{SITE_CONFIG.get('gitalk_owner', '')}',
-        admin: {json.dumps(SITE_CONFIG.get('gitalk_admin', []))},
-        proxy: '{SITE_CONFIG.get('gitalk_proxy', 'https://cors-server.codingme.net/https://github.com/login/oauth/access_token')}',
+document.addEventListener("DOMContentLoaded", function() {
+    const gitalk = new Gitalk({
+        clientID: '""" + SITE_CONFIG.get('gitalk_clientID', '') + """', 
+        clientSecret: '""" + SITE_CONFIG.get('gitalk_clientSecret', '') + """',
+        repo: '""" + SITE_CONFIG.get('gitalk_repo', '') + """',
+        owner: '""" + SITE_CONFIG.get('gitalk_owner', '') + """',
+        admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """,
+        proxy: '""" + SITE_CONFIG.get('gitalk_proxy', 'https://cors-server.codingme.net/https://github.com/login/oauth/access_token') + """',
         // 这里提前解码以防 location 提取出含有 % 的过长中文字符串，防止 GitHub Issue Label 因为超长报 422 错误
         id: decodeURI(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)).substring(0, 50),
         distractionFreeMode: false
-    }});
+    });
     gitalk.render('gitalk-container');
-}});
+});
 </script>
 
 <footer style="text-align: center; margin-top: 5rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid #eee; width: 100%;">
