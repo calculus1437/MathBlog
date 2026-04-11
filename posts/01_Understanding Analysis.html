@@ -1083,6 +1083,7 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
 <!-- INJECTED_NAV_TOC -->
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1346,13 +1347,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
-// "一行代码强杀 Bug": 拦截拦截过度的 URL 编码，防止 GitHub 校验前缀失败
-const originalEncode = window.encodeURIComponent;
-window.encodeURIComponent = function(str) {
-    if (str === window.location.href) { return originalEncode(decodeURI(str)); }
-    return originalEncode(str);
-};
-
 document.addEventListener("DOMContentLoaded", function() {
     const gitalk = new Gitalk({
         clientID: 'Ov23liom9xQu3sAdxf6X', 

@@ -301,13 +301,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
-// "一行代码强杀 Bug": 拦截拦截过度的 URL 编码，防止 GitHub 校验前缀失败
-const originalEncode = window.encodeURIComponent;
-window.encodeURIComponent = function(str) {
-    if (str === window.location.href) { return originalEncode(decodeURI(str)); }
-    return originalEncode(str);
-};
-
 document.addEventListener("DOMContentLoaded", function() {
     const gitalk = new Gitalk({
         clientID: 'Ov23liom9xQu3sAdxf6X', 
