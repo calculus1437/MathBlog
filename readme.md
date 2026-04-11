@@ -14,9 +14,9 @@
 在移动端上阅读可能会有格式问题，建议在电脑上阅读。
 
 ## 致谢
-Pianfan，初版网站参考了他的文章 [零基础小白如何搭建自己的 github.io 个人网站](https://pianfan.github.io/build_own_website/) （初版现已删除）
+[Pianfan](https://github.com/pianfan)，初版网站参考了他的文章 [零基础小白如何搭建自己的 github.io 个人网站](https://pianfan.github.io/build_own_website/) （初版现已删除）
 
-Zhou，[利用github.io快速拥有自己的第一个免费个人主页](https://zhuanlan.zhihu.com/p/36912355)，提供了网站主页的构建方法。
+[iMaeGoo](https://github.com/imaegoo)，提供了 [评论系统部署支持](https://twikoo.js.org/)，本人使用的是 [Hugging Face 部署](https://twikoo.js.org/backend.html#hugging-face-%E9%83%A8%E7%BD%B2)，因为 Vercel，Zeabur，Netlify 的部署都失败了（
 
 Gemini 3.1 Pro，提供了几乎所有网站源代码的编写与调试工作。
 
