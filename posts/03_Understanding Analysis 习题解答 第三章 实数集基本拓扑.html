@@ -774,6 +774,8 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
 <!-- INJECTED_NAV_TOC -->
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1037,15 +1039,23 @@ document.addEventListener("DOMContentLoaded", function() {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
+// "一行代码强杀 Bug": 拦截拦截过度的 URL 编码，防止 GitHub 校验前缀失败
+const originalEncode = window.encodeURIComponent;
+window.encodeURIComponent = function(str) {
+    if (str === window.location.href) { return originalEncode(decodeURI(str)); }
+    return originalEncode(str);
+};
+
 document.addEventListener("DOMContentLoaded", function() {
     const gitalk = new Gitalk({
-        clientID: 'Ov23liom9xQu3sAdxf6X', // 替换为你的 GitHub Client ID
-        clientSecret: '1b47474c7b40af8af53f9ae9c47c8775f92fd7a7', // 替换为你的 GitHub Client Secret
-        repo: 'calculus1437.github.io', // 用于存放评论的仓库名，比如 'MathBlog'
-        owner: 'calculus1437', // 你的 GitHub 用户名
-        admin: ['calculus1437'], // 可以初始化评论的管理员用户名列表
-        id: location.pathname.substring(location.pathname.lastIndexOf('/') + 1, location.pathname.lastIndexOf('/') + 51), // 页面唯一标识
-        distractionFreeMode: false // 类似 Facebook 评论框的全屏遮罩效果
+        clientID: 'Ov23liom9xQu3sAdxf6X', 
+        clientSecret: '1b47474c7b40af8af53f9ae9c47c8775f92fd7a7',
+        repo: 'calculus1437.github.io',
+        owner: 'calculus1437',
+        admin: ['calculus1437'],
+        // 这里提前解码以防 location 提取出含有 % 的过长中文字符串，防止 GitHub Issue Label 因为超长报 422 错误
+        id: decodeURI(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)).substring(0, 50),
+        distractionFreeMode: false
     });
     gitalk.render('gitalk-container');
 });
