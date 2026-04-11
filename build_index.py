@@ -333,14 +333,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <!-- Twikoo 评论区容器及资源引入 -->
 <div id="tcomment" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
-<script src="https://cdn.staticfile.net/twikoo/1.6.39/twikoo.all.min.js"></script>
+<script src="https://unpkg.com/twikoo@1.6.41/dist/twikoo.all.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    twikoo.init({
-        envId: '""" + SITE_CONFIG.get('twikoo_envId', 'https://twikoo-magic.vercel.app') + """', // 填入你在云开发/Vercel等部署的 twikoo 环境地址
-        el: '#tcomment',
-        path: location.pathname
-    });
+    setTimeout(function() {
+        if (typeof twikoo !== 'undefined') {
+            twikoo.init({
+                envId: '""" + SITE_CONFIG.get('twikoo_envId', 'https://twikoo-magic.vercel.app') + """',
+                el: '#tcomment',
+                path: decodeURI(location.pathname).substring(0, 100)
+            });
+        } else {
+            console.error("Twikoo 加载失败");
+        }
+    }, 500);
 });
 </script>
 
