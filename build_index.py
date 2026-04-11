@@ -8,12 +8,7 @@ def load_config():
     config = {
         'title': "calculus_1437's Math Notes",
         'description': "纯净的 HTML 数学笔记博客",
-        'gitalk_clientID': '',
-        'gitalk_clientSecret': '',
-        'gitalk_repo': '',
-        'gitalk_owner': '',
-        'gitalk_admin': [],
-        'gitalk_proxy': ''
+        'twikoo_envId': 'https://twikoo-magic.vercel.app'
     }
     if not os.path.exists('_config.yml'): return config
     
@@ -336,23 +331,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-<!-- Gitalk 评论区容器及资源引入 -->
-<div id="gitalk-container" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<!-- Twikoo 评论区容器及资源引入 -->
+<div id="tcomment" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
+<script src="https://cdn.staticfile.net/twikoo/1.6.39/twikoo.all.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const gitalk = new Gitalk({
-        clientID: '""" + SITE_CONFIG.get('gitalk_clientID', '') + """', 
-        clientSecret: '""" + SITE_CONFIG.get('gitalk_clientSecret', '') + """',
-        repo: '""" + SITE_CONFIG.get('gitalk_repo', '') + """',
-        owner: '""" + SITE_CONFIG.get('gitalk_owner', '') + """',
-        admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """,
-        proxy: '""" + SITE_CONFIG.get('gitalk_proxy', 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token') + """',
-        id: decodeURI(location.pathname).substring(0, 50),      // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
+    twikoo.init({
+        envId: '""" + SITE_CONFIG.get('twikoo_envId', 'https://twikoo-magic.vercel.app') + """', // 填入你在云开发/Vercel等部署的 twikoo 环境地址
+        el: '#tcomment',
+        path: location.pathname
     });
-    gitalk.render('gitalk-container');
 });
 </script>
 
