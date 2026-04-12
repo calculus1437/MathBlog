@@ -338,17 +338,18 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- Gitalk 评论区容器及资源引入 -->
 <div id="gitalk-container" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//woshisb.eu.org/js/gitalk.m.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     var gitalk = new Gitalk({
-        clientID: '""" + SITE_CONFIG.get('gitalk_clientID', '') + """', 
-        clientSecret: '""" + SITE_CONFIG.get('gitalk_clientSecret', '') + """',
-        repo: '""" + SITE_CONFIG.get('gitalk_repo', '') + """',
+        clientID: '""" + SITE_CONFIG.get('gitalk_clientID', '') + """', // clientID 
+        clientSecret: '""" + SITE_CONFIG.get('gitalk_clientSecret', '') + """', // clientSecret
+        repo: '""" + SITE_CONFIG.get('gitalk_repo', 'gitalk-comments') + """', // 评论仓库名
         owner: '""" + SITE_CONFIG.get('gitalk_owner', '') + """',
-        admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """,
-        id: decodeURI(location.pathname).substring(0, 50),      // Ensure uniqueness and len
-        distractionFreeMode: false  // Facebook-like distraction
+        admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """, // 管理人
+        id: location.pathname, // 返回当前 URL 的路径部分作为id
+        language:'zh-CN', // 语言
+        distractionFreeMode: false  // 无干扰模式
     })
     gitalk.render('gitalk-container')
 });

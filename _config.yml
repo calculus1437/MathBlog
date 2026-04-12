@@ -6,7 +6,7 @@ author: calculus_1437
 # Gitalk 评论区配置
 gitalk_clientID: Ov23liom9xQu3sAdxf6X
 gitalk_clientSecret: 1b47474c7b40af8af53f9ae9c47c8775f92fd7a7
-gitalk_repo: gitalk-comments
+gitalk_repo: calculus1437.github.io
 gitalk_owner: calculus1437
 gitalk_admin:
   - calculus1437
