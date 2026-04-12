@@ -7,16 +7,12 @@
 目录的右上角有一个收起按键，可以隐藏目录，避免目录遮挡正文的情况。
 
 - 标签分类：在“分类”一栏中可以看到不同标签下分类的文章，方便查找。
-  
-- 评论区：每篇文章的底部都有一个评论区，阅读过程中出现任何问题均可留言，我会尽快回复。
 
 ## 温馨提醒
 在移动端上阅读可能会有格式问题，建议在电脑上阅读。
 
 ## 致谢
 [Pianfan](https://github.com/pianfan)，初版网站参考了他的文章 [零基础小白如何搭建自己的 github.io 个人网站](https://pianfan.github.io/build_own_website/) （初版现已删除）
-
-[iMaeGoo](https://github.com/imaegoo)，提供了 [评论系统部署支持](https://twikoo.js.org/)，本人使用的是 [Hugging Face 部署](https://twikoo.js.org/backend.html#hugging-face-%E9%83%A8%E7%BD%B2)，因为 Vercel，Zeabur，Netlify 的部署都失败了（
 
 Gemini 3.1 Pro，提供了几乎所有网站源代码的编写与调试工作。
 

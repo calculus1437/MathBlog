@@ -7,12 +7,7 @@ from datetime import datetime
 def load_config():
     config = {
         'title': "calculus_1437's Math Notes",
-        'description': "纯净的 HTML 数学笔记博客",
-        'gitalk_clientID': '',
-        'gitalk_clientSecret': '',
-        'gitalk_repo': '',
-        'gitalk_owner': '',
-        'gitalk_admin': []
+        'description': "纯净的 HTML 数学笔记博客"
     }
     if not os.path.exists('_config.yml'): return config
     
@@ -332,26 +327,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     document.body.appendChild(nav);
-});
-</script>
-
-<!-- Gitalk 评论区容器及资源引入 -->
-<div id="gitalk-container" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="//woshisb.eu.org/js/gitalk.m.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var gitalk = new Gitalk({
-        clientID: '""" + SITE_CONFIG.get('gitalk_clientID', '') + """', // clientID 
-        clientSecret: '""" + SITE_CONFIG.get('gitalk_clientSecret', '') + """', // clientSecret
-        repo: '""" + SITE_CONFIG.get('gitalk_repo', 'gitalk-comments') + """', // 评论仓库名
-        owner: '""" + SITE_CONFIG.get('gitalk_owner', '') + """',
-        admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """, // 管理人
-        id: location.pathname, // 返回当前 URL 的路径部分作为id
-        language:'zh-CN', // 语言
-        distractionFreeMode: false  // 无干扰模式
-    })
-    gitalk.render('gitalk-container')
 });
 </script>
 
