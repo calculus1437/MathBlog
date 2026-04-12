@@ -8,7 +8,11 @@ def load_config():
     config = {
         'title': "calculus_1437's Math Notes",
         'description': "纯净的 HTML 数学笔记博客",
-        'twikoo_envId': 'https://twikoo-magic.vercel.app'
+        'gitalk_clientID': '',
+        'gitalk_clientSecret': '',
+        'gitalk_repo': '',
+        'gitalk_owner': '',
+        'gitalk_admin': []
     }
     if not os.path.exists('_config.yml'): return config
     
@@ -331,22 +335,22 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-<!-- Twikoo 评论区容器及资源引入 -->
-<div id="tcomment" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
-<script src="https://unpkg.com/twikoo@1.7.7/dist/twikoo.all.min.js"></script>
+<!-- Gitalk 评论区容器及资源引入 -->
+<div id="gitalk-container" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-        if (typeof twikoo !== 'undefined') {
-            twikoo.init({
-                envId: '""" + SITE_CONFIG.get('twikoo_envId', 'https://twikoo-magic.vercel.app') + """',
-                el: '#tcomment',
-                path: decodeURI(location.pathname).substring(0, 100)
-            });
-        } else {
-            console.error("Twikoo 加载失败");
-        }
-    }, 500);
+    var gitalk = new Gitalk({
+        clientID: '""" + SITE_CONFIG.get('gitalk_clientID', '') + """', 
+        clientSecret: '""" + SITE_CONFIG.get('gitalk_clientSecret', '') + """',
+        repo: '""" + SITE_CONFIG.get('gitalk_repo', '') + """',
+        owner: '""" + SITE_CONFIG.get('gitalk_owner', '') + """',
+        admin: """ + json.dumps(SITE_CONFIG.get('gitalk_admin', [])) + """,
+        id: decodeURI(location.pathname).substring(0, 50),      // Ensure uniqueness and len
+        distractionFreeMode: false  // Facebook-like distraction
+    })
+    gitalk.render('gitalk-container')
 });
 </script>
 
