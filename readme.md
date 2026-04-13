@@ -16,7 +16,7 @@
 ## 致谢
 [Pianfan](https://github.com/pianfan)，初版网站参考了他的文章 [零基础小白如何搭建自己的 github.io 个人网站](https://pianfan.github.io/build_own_website/) （初版现已删除）
 
-[iMaeGoo](https://github.com/imaegoo)，提供了 [评论系统部署支持](https://twikoo.js.org/)，本人使用的是 [Hugging Face 部署](https://twikoo.js.org/backend.html#hugging-face-%E9%83%A8%E7%BD%B2)，因为 Vercel，Zeabur，Netlify 的部署都失败了（
+[giscus](https://giscus.app/zh-CN)，提供了基于 GitHub Discussions 的漂亮评论页面方案。
 
 Gemini 3.1 Pro，提供了几乎所有网站源代码的编写与调试工作。
 

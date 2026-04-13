@@ -7,8 +7,7 @@ from datetime import datetime
 def load_config():
     config = {
         'title': "calculus_1437's Math Notes",
-        'description': "纯净的 HTML 数学笔记博客",
-        'twikoo_envId': ''
+        'description': "纯净的 HTML 数学笔记博客"
     }
     if not os.path.exists('_config.yml'): return config
     
@@ -331,17 +330,24 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-<!-- Twikoo 评论区容器及资源引入 -->
-<div id="tcomment" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></div>
-<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    twikoo.init({
-        envId: '""" + SITE_CONFIG.get('twikoo_envId', '') + """', 
-        el: '#tcomment'
-    })
-});
-</script>
+<!-- Giscus 评论区容器及资源引入 -->
+<div style="max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; margin-top: 3rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+    <script src="https://giscus.app/client.js"
+            data-repo="calculus1437/gitalk-comments"
+            data-repo-id="R_kgDOSAPwtQ"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOSAPwtc4C6vs6"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
+    </script>
+</div>
 
 <footer style="text-align: center; margin-top: 5rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid #eee; width: 100%;">
     Copyright 2026 HuangTianye 版权所有
