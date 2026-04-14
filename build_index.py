@@ -41,7 +41,7 @@ SITE_CONFIG = load_config()
 POSTS_DIR = 'posts'
 INDEX_FILE = 'index.html'
 
-def enhance_post(file_path):
+def enhance_post(file_path, post_title=None):
     """为文章添加悬浮目录和返回主页的导航，增强在线浏览体验"""
     import re
     try:
@@ -49,6 +49,24 @@ def enhance_post(file_path):
             content = f.read()
 
         new_content = content
+        
+        # SEO 优化：替换文章标题并注入 keywords 与 description
+        seo_tags = """
+<meta name="description" content="纯净的 HTML 数学笔记博客 | calculus_1437's Math Notes">
+<meta name="keywords" content="calculus1437, calculus_1437, understanding analysis, understanding analysis solutions">
+"""
+        new_title = f"{post_title} | calculus_1437's Math Notes" if post_title else "calculus_1437's Math Notes"
+        
+        # 移除可能重复注入的 seo_tags
+        new_content = new_content.replace(seo_tags, "")
+        
+        new_content = re.sub(
+            r'<title>.*?</title>',
+            f'<title>{new_title}</title>\n{seo_tags}',
+            new_content,
+            flags=re.IGNORECASE
+        )
+        
         # 恢复使用稳定且不限制 CORS 的 cdnjs 或者 unpkg，避免 staticfile 的加载/阻塞问题
         new_content = re.sub(
             r'href="file:///[^"]+katex\.min\.css"',
@@ -369,7 +387,13 @@ def get_html_title(file_path):
             content = f.read()
             match = re.search(r'<title>(.*?)</title>', content, re.IGNORECASE)
             if match:
-                return match.group(1).strip()
+                title = match.group(1).strip()
+                # 过滤掉附加的站点名称，以获取纯文章标题
+                if " | calculus_1437's Math Notes" in title:
+                    title = title.replace(" | calculus_1437's Math Notes", "")
+                elif " - calculus_1437's Math Notes" in title:
+                    title = title.replace(" - calculus_1437's Math Notes", "")
+                return title
     except Exception as e:
         print(f"读取文件 {file_path} 失败: {e}")
     return os.path.basename(file_path).replace('.html', '')
@@ -430,7 +454,7 @@ def build_index():
         })
 
         # 为每篇文章处理增强（添加目录及返回主页按钮等）
-        enhance_post(file_path)
+        enhance_post(file_path, title)
     
     # 按文件名升序排序（保证第一章在前）
     posts_data.sort(key=lambda x: x['filename'])
@@ -450,7 +474,9 @@ def build_index():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</title>
+    <title>{SITE_CONFIG.get('title', "calculus_1437's Math Notes")}</title>
+    <meta name="description" content="纯净的 HTML 数学笔记博客 | calculus_1437's Math Notes">
+    <meta name="keywords" content="calculus1437, calculus_1437, understanding analysis, understanding analysis solutions">
     <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
