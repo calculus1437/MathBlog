@@ -14,13 +14,13 @@
 在移动端上阅读可能会有格式问题，建议在电脑上阅读。
 
 ## 致谢
-[Pianfan](https://github.com/pianfan)，初版网站参考了他的文章 [零基础小白如何搭建自己的 github.io 个人网站](https://pianfan.github.io/build_own_website/) （初版现已删除）
+[Pianfan](https://pianfan.github.io/about/)，初版网站参考了他的文章 [零基础小白如何搭建自己的 github.io 个人网站](https://pianfan.github.io/build_own_website/) （初版现已删除）
 
-[iMaeGoo](https://github.com/imaegoo)，提供了 [Twikoo 评论系统](https://twikoo.js.org/)，为我构建评论区提供了很大帮助。
+[iMaeGoo](https://www.imaegoo.com/about/)，提供了 [Twikoo 评论系统](https://twikoo.js.org/)，为我构建评论区提供了很大帮助。
 
 [giscus](https://giscus.app/zh-CN)，现在使用的评论区系统。
 
-Gemini 3.1 Pro，提供了几乎所有网站源代码的编写与调试工作。
+Gemini 3.1 Pro，进行了几乎所有网站源代码的编写与调试工作。
 
 ## 网站源码
 https://github.com/calculus1437/calculus1437.github.io
