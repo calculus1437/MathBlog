@@ -83,17 +83,64 @@ def enhance_post(file_path, post_title=None):
             r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
             new_content
         )
-            
+        
+        # 兼容并将带有 MathJax 各种版本的页面，如果出现动态 MathJax 加载，自动升级并注入懒加载机制
+        # 把老旧慢的 MathJax v2 或无懒加载加载配置的脚本替换掉，开启 ui/lazy 扩展
+        if 'MathJax' in new_content or 'mathjax' in new_content.lower():
+            # 阻止原生的 MathJax.js（通常带 ?config=TeX-AMS_HTML 或等）加载
+            new_content = re.sub(
+                r'<script[^>]*src="[^"]*mathjax[^"]*"[^>]*></script>',
+                '',
+                new_content,
+                flags=re.IGNORECASE
+            )
+            # 移除旧的配置 script
+            new_content = re.sub(
+                r'<script type="text/x-mathjax-config">.*?</script>',
+                '',
+                new_content,
+                flags=re.DOTALL
+            )
+
         # 让已注入的页面也能重新更新！把之前注入的统统去掉，重新插入
         if '<!-- INJECTED_NAV_TOC -->' in new_content:
             new_content = new_content.split('<!-- INJECTED_NAV_TOC -->')[0] + '</body>'
 
         # 注入的 HTML/JS/CSS（已移除对国内访问较慢的外部字体链接，使用系统原生字体栈即刻渲染）
+        new_mathjax_script = ""
+        if 'mathjax-exps' in new_content or 'math/tex' in new_content or 'MathJax' in new_content:
+            new_mathjax_script = """
+<!-- 引入支持按需懒渲染的 MathJax 3 引擎，成倍提升数百个公式的长文档渲染速度 -->
+<script>
+window.MathJax = {
+  loader: {load: ['ui/lazy']}, // 开启懒渲染：屏幕外的公式滑动到才计算！
+  tex: {
+    inlineMath: [['$','$'], ['\\\\(','\\\\)']],
+    displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
+    processEscapes: true
+  },
+  options: {
+    enableMenu: false, // 禁用菜单可以进一步提升解析速度
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+"""
+
         injected_html = """
 <!-- INJECTED_NAV_TOC -->
+""" + new_mathjax_script + """
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+/* MathJax 与巨型文档的激进性能优化：开启浏览器原生懒渲染。对于未进入视口的复杂 DOM 树，一律推迟布局，秒开上万字的公式文档 */
+.mathjax-exps, .MathJax_Display, .MathJax_SVG_Display, .MathJax, .MathJax_SVG, svg {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 30px;
+}
+
 /* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
