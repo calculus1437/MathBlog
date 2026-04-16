@@ -9,6 +9,7 @@
 
 
 
+
       <!-- tags: Understanding analysis -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1910,6 +1911,7 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
 <!-- INJECTED_NAV_TOC -->
 
 <!-- 引入支持按需懒渲染的 MathJax 3 引擎，成倍提升数百个公式的长文档渲染速度 -->
@@ -1922,7 +1924,8 @@ window.MathJax = {
     processEscapes: true
   },
   options: {
-    enableMenu: false, // 禁用菜单可以进一步提升解析速度
+    enableMenu: true, // 恢复右键菜单，允许复制公式代码
+    a11y: { disable: true }, // 顺手关掉无障碍朗读模块，抵消开启菜单带来的小部分性能损耗
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   }

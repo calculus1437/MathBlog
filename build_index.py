@@ -120,7 +120,8 @@ window.MathJax = {
     processEscapes: true
   },
   options: {
-    enableMenu: false, // 禁用菜单可以进一步提升解析速度
+    enableMenu: true, // 恢复右键菜单，允许复制公式代码
+    a11y: { disable: true }, // 顺手关掉无障碍朗读模块，抵消开启菜单带来的小部分性能损耗
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   }
