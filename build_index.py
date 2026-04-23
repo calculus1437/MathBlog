@@ -142,6 +142,14 @@ window.MathJax = {
     contain-intrinsic-size: 1px 30px;
 }
 
+/* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
+mjx-container[display="true"], .MathJax_Display {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-width: 100%;
+    padding-bottom: 0.5em; /* 防止滚动条遮挡公式底部的下标 */
+}
+
 /* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
     font-size: 20px;
