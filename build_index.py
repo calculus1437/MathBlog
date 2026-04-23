@@ -471,13 +471,26 @@ def get_html_tags(file_path):
     except Exception as e:
         pass
         
-    # 去重并过滤空值和 "默认分类" 以外的标签
-    tags = list(set([t for t in tags if t]))
-    if not tags:
+    # 过滤掉我们自动注入的 SEO 关键词，避免它们污染实际的分类标签
+    seo_ignore = ['calculus1437', 'calculus_1437', 'understanding analysis', 'understanding analysis solutions']
+    
+    # 去重、统一大小写并过滤
+    clean_tags = []
+    for t in tags:
+        t = t.strip()
+        if not t: continue
+        if t.lower() in seo_ignore: continue
+        
+        # 英文单词首字母大写避免由于大小写不一致导致的重复标签
+        t = t.title() if t.isascii() else t
+        if t not in clean_tags:
+            clean_tags.append(t)
+            
+    if not clean_tags:
         # 如果从文件名获取像 01_ 这样的也可以当作一种分类启发
         # 比如 "01_Understanding Analysis..." -> "Understanding Analysis"
         return ["默认分类"]
-    return tags
+    return clean_tags
 
 def build_index():
     # 获取 posts 目录下的所有 html 文件
