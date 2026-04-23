@@ -148,6 +148,14 @@ mjx-container[display="true"], .MathJax_Display {
     overflow-y: hidden !important;
     max-width: 100%;
     padding-bottom: 0.5em; /* 防止滚动条遮挡公式底部的下标 */
+    
+    /* 隐藏滚动条本身，但保留滑动/滚动功能 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+mjx-container[display="true"]::-webkit-scrollbar, 
+.MathJax_Display::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
 }
 
 /* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
@@ -507,15 +515,15 @@ def build_index():
         file_path = os.path.join(POSTS_DIR, filename)
         title = get_html_title(file_path)
         tags = get_html_tags(file_path)
-        # 获取文件的最后修改时间作为日期
-        mtime = os.path.getmtime(file_path)
-        date_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+        # 获取文件的最初创建时间（上传/生成时间）作为文章日期
+        ctime = os.path.getctime(file_path)
+        date_str = datetime.fromtimestamp(ctime).strftime('%Y-%m-%d')
 
         posts_data.append({
             'filename': filename,
             'title': title,
             'date': date_str,
-            'mtime': mtime,
+            'mtime': ctime,
             'tags': tags
         })
 
