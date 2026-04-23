@@ -462,6 +462,9 @@ def get_html_tags(file_path):
             match_meta = re.search(r'<meta\s+name="keywords"\s+content="(.*?)">', content, re.IGNORECASE)
             if match_meta:
                 keywords = [k.strip() for k in match_meta.group(1).split(',') if k.strip()]
+                # 彻底过滤掉我们自动注入的全局 SEO 关键词，避免所有文章全被挂上同样的标签
+                seo_ignore = ['calculus1437', 'calculus_1437', 'understanding analysis', 'understanding analysis solutions']
+                keywords = [k for k in keywords if k.lower() not in seo_ignore]
                 tags.extend(keywords)
             # 3. 从 HTML 注释提取 <!-- tags: tag1, tag2 -->
             match_comment = re.search(r'<!--\s*tags?:\s*(.*?)\s*-->', content, re.IGNORECASE)
@@ -471,15 +474,11 @@ def get_html_tags(file_path):
     except Exception as e:
         pass
         
-    # 过滤掉我们自动注入的 SEO 关键词，避免它们污染实际的分类标签
-    seo_ignore = ['calculus1437', 'calculus_1437', 'understanding analysis', 'understanding analysis solutions']
-    
     # 去重、统一大小写并过滤
     clean_tags = []
     for t in tags:
         t = t.strip()
         if not t: continue
-        if t.lower() in seo_ignore: continue
         
         # 英文单词首字母大写避免由于大小写不一致导致的重复标签
         t = t.title() if t.isascii() else t
@@ -487,8 +486,6 @@ def get_html_tags(file_path):
             clean_tags.append(t)
             
     if not clean_tags:
-        # 如果从文件名获取像 01_ 这样的也可以当作一种分类启发
-        # 比如 "01_Understanding Analysis..." -> "Understanding Analysis"
         return ["默认分类"]
     return clean_tags
 
