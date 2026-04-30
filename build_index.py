@@ -113,13 +113,13 @@ def enhance_post(file_path, post_title=None):
 <!-- 引入支持按需懒渲染的 MathJax 3 引擎，成倍提升数百个公式的长文档渲染速度 -->
 <script>
 window.MathJax = {
-  loader: {load: ['ui/lazy']}, // 开启懒渲染：屏幕外的公式滑动到才计算！
   tex: {
     inlineMath: [['$','$'], ['\\\\(','\\\\)']],
     displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
     processEscapes: true
   },
   options: {
+    processScroll: true // 开启滚动监听，自动渲染进入视口的公式，离开视口的公式则卸载释放资源
     enableMenu: true, // 恢复右键菜单，允许复制公式代码
     a11y: { disable: true }, // 顺手关掉无障碍朗读模块，抵消开启菜单带来的小部分性能损耗
     ignoreHtmlClass: 'tex2jax_ignore',
@@ -136,11 +136,7 @@ window.MathJax = {
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* MathJax 与巨型文档的激进性能优化：开启浏览器原生懒渲染。对于未进入视口的复杂 DOM 树，一律推迟布局，秒开上万字的公式文档 */
-.mathjax-exps, .MathJax_Display, .MathJax_SVG_Display, .MathJax, .MathJax_SVG, svg {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 30px;
-}
+
 
 /* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
 mjx-container[display="true"], .MathJax_Display {
