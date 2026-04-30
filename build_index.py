@@ -118,8 +118,8 @@ MathJax = {
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         packages: {'[+]': ['ams']},
-    chtml: {
-      font: 'mathjax-tex'   // ← 关键：改用旧版 TeX 字体，系统自带，不再下载任何 woff2
+    output: {
+      font: 'mathjax-tex' // 用回 v3 风格的原始 TeX 字体，去掉了 newcm 的多文件拖累
     },
     options: {
       // 彻底禁止菜单和无障碍相关渲染动作
@@ -137,7 +137,7 @@ MathJax = {
 };
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml-nofont.js" defer></script>
 """
 
         injected_html = """
