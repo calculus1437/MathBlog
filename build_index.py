@@ -84,70 +84,42 @@ def enhance_post(file_path, post_title=None):
             new_content
         )
         
-        # 兼容并将带有 MathJax 各种版本的页面，如果出现动态 MathJax 加载，自动升级并注入懒加载机制
-        # 把老旧慢的 MathJax v2 或无懒加载加载配置的脚本替换掉，开启 ui/lazy 扩展
-        if 'MathJax' in new_content or 'mathjax' in new_content.lower():
-            # 阻止原生的 MathJax.js（通常带 ?config=TeX-AMS_HTML 或等）加载
-            new_content = re.sub(
-                r'<script[^>]*src="[^"]*mathjax[^"]*"[^>]*></script>',
-                '',
-                new_content,
-                flags=re.IGNORECASE
-            )
-            # 移除旧的配置 script
-            new_content = re.sub(
-                r'<script type="text/x-mathjax-config">.*?</script>',
-                '',
-                new_content,
-                flags=re.DOTALL
-            )
+        # 移除已有的 MathJax
+        new_content = re.sub(
+            r'<script[^>]*src="[^"]*mathjax[^"]*"[^>]*></script>',
+            '',
+            new_content,
+            flags=re.IGNORECASE
+        )
+        # 移除旧的配置 script
+        new_content = re.sub(
+            r'<script type="text/x-mathjax-config">.*?</script>',
+            '',
+            new_content,
+            flags=re.DOTALL
+        )
 
         # 让已注入的页面也能重新更新！把之前注入的统统去掉，重新插入
         if '<!-- INJECTED_NAV_TOC -->' in new_content:
             new_content = new_content.split('<!-- INJECTED_NAV_TOC -->')[0] + '</body>'
 
         # 注入的 HTML/JS/CSS（已移除对国内访问较慢的外部字体链接，使用系统原生字体栈即刻渲染）
-        new_mathjax_script = ""
-        if 'mathjax-exps' in new_content or 'math/tex' in new_content or 'MathJax' in new_content:
-            new_mathjax_script = """
-<!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
-<script>
-MathJax = {
-    tex:  {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true,
-        packages: {'[+]': ['ams']},
-    },
-    loader: {
-      // 只加载必需的组件，不加载菜单、a11y
-      load: ['input/tex-base', 'output/chtml']
-    },
-};
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml-nofont.js" defer></script>
+        katex_script = """
+<!-- 使用 KaTeX 全局渲染数学公式 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\\\[', right: '\\\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\\\(', right: '\\\\)', display: false}], throwOnError: false});"></script>
 """
 
         injected_html = """
 <!-- INJECTED_NAV_TOC -->
-""" + new_mathjax_script + """
+""" + katex_script + """
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 
-/* 整个页面的内容区域启用懒绘制（跳过离屏区域的像素渲染） */
-body {
-    content-visibility: auto;
-}
-
-/* MathJax 公式容器也继承这一特性，并优化固有尺寸占位 */
-.MathJax_SVG_Display, .MathJax_Display, .MathJax_SVG, .MathJax {
-    content-visibility: auto;
-}
-
 /* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
-mjx-container[display="true"], .MathJax_Display {
+.katex-display {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     max-width: 100%;
@@ -156,8 +128,7 @@ mjx-container[display="true"], .MathJax_Display {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
 }
-mjx-container[display="true"]::-webkit-scrollbar, 
-.MathJax_Display::-webkit-scrollbar {
+.katex-display::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge */
 }
 
