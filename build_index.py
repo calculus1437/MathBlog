@@ -117,12 +117,21 @@ MathJax = {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
-        packages: {'[+]': ['ams', 'physics']},
+        packages: {'[+]': ['ams']},
     },
+    options: {
+        renderActions: {
+            addMenu: [],       // 彻底禁止加载菜单相关的所有 JS
+            enrich: [],        // 彻底禁止语义化/辅助功能
+            ... // 其他可能需要保留的 renderActions
+        }
+    },
+    loader: {load: ['input/tex', 'output/chtml']}, // 只加载必要的
+    chtml: { font: "mathjax-tex" },
 };
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
 """
 
         injected_html = """
