@@ -110,7 +110,7 @@ def enhance_post(file_path, post_title=None):
         new_mathjax_script = ""
         if 'mathjax-exps' in new_content or 'math/tex' in new_content or 'MathJax' in new_content:
             new_mathjax_script = """
-<!-- 引入支持按需懒渲染的 MathJax 3 引擎，成倍提升数百个公式的长文档渲染速度 -->
+<!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
 <script>
 MathJax = {
     tex: {
@@ -121,7 +121,16 @@ MathJax = {
     loader: {
         load: ['input/tex', 'output/chtml', 'ui/lazy']
     },
-    };
+};
+const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          MathJax.typesetPromise([entry.target]);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.1});
+    
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
 """
