@@ -4,61 +4,298 @@
 <meta name="description" content="纯净的 HTML 数学笔记博客 | calculus_1437's Math Notes">
 <meta name="keywords" content="calculus1437, calculus_1437, understanding analysis, understanding analysis solutions">
 
+<!-- INJECTED_NAV_TOC -->
 
+<!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
+<script>
+MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\(', '\)']],
+        displayMath: [['$$', '$$'], ['\[', '\]']],
+        processEscapes: true,
+        packages: {'[+]': ['ams', 'physics']},
+    },
+    loader: {
+        load: ['ui/lazy']
+    },
+};
+</script>
 
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
 
+<!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
+<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
 
+/* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
+mjx-container[display="true"], .MathJax_Display {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-width: 100%;
+    padding-bottom: 0.5em; /* 防止滚动条遮挡公式底部的下标 */
+    
+    /* 隐藏滚动条本身，但保留滑动/滚动功能 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+mjx-container[display="true"]::-webkit-scrollbar, 
+.MathJax_Display::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
 
+/* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
+body, .markdown-preview.markdown-preview, .markdown-preview {
+    font-size: 20px;
+    line-height: 1.6;
+    font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
+    font-weight: 500; /* 全局统一使用 Medium 字重 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
+/* 悬浮导航与目录样式 */
+.custom-floating-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px;
+    z-index: 9999;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.custom-floating-nav.minimized {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.custom-floating-nav.minimized > *:not(.nav-minimize-btn) {
+    display: none !important;
+}
+.custom-floating-nav .nav-minimize-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #888;
+    padding: 4px;
+    line-height: 1;
+    border-radius: 4px;
+}
+.custom-floating-nav .nav-minimize-btn:hover {
+    color: #333;
+    background: #f0f0f0;
+}
+.custom-floating-nav.minimized .nav-minimize-btn {
+    position: static;
+    font-size: 24px;
+    color: #228ae6;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-floating-nav .nav-btns {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.custom-floating-nav .home-btn, .custom-floating-nav .about-btn, .custom-floating-nav .category-btn {
+    flex: 1;
+    background: #228ae6;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.2s;
+    box-sizing: border-box;
+}
+.custom-floating-nav .home-btn:hover { background: #1b6ec2; }
+.custom-floating-nav .category-btn { background: #f06595; }
+.custom-floating-nav .category-btn:hover { background: #d6336c; }
+.custom-floating-nav .about-btn { background: #40c057; }
+.custom-floating-nav .about-btn:hover { background: #2f9e44; }
+.custom-floating-nav h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+.custom-floating-nav ul {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+.custom-floating-nav > ul {
+    padding-left: 0;
+}
+.custom-floating-nav a.toc-link {
+    text-decoration: none;
+    color: #555;
+    display: block;
+    padding: 4px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+.custom-floating-nav a.toc-link:hover {
+    color: #228ae6;
+}
+/* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
+@media (max-width: 1200px) {
+    .custom-floating-nav.minimized {
+        bottom: 30px;
+        right: 20px;
+        top: auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+    }
+    .custom-floating-nav {
+        top: auto;
+        bottom: 30px;
+        right: 20px;
+        width: auto;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+    .custom-floating-nav h3,
+    .custom-floating-nav ul,
+    .custom-floating-nav p {
+        display: none; /* 手机上隐藏目录主体 */
+    }
+    .custom-floating-nav .nav-btns {
+        margin-bottom: 0;
+        width: auto;
+    }
+    .custom-floating-nav .home-btn, .custom-floating-nav .about-btn, .custom-floating-nav .category-btn {
+        padding: 12px 20px;
+        border-radius: 50px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        font-size: 16px;
+    }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector('.custom-floating-nav')) return;
+    
+    const nav = document.createElement('div');
+    nav.className = 'custom-floating-nav';
+    
+    // 最小化按钮
+    const minBtn = document.createElement('button');
+    minBtn.className = 'nav-minimize-btn';
+    minBtn.innerHTML = '➖';
+    minBtn.title = '收起目录';
+    minBtn.onclick = function(e) {
+        e.stopPropagation();
+        if (nav.classList.contains('minimized')) {
+            nav.classList.remove('minimized');
+            minBtn.innerHTML = '➖';
+            minBtn.title = '收起目录';
+        } else {
+            nav.classList.add('minimized');
+            minBtn.innerHTML = '📑';
+            minBtn.title = '展开目录';
+        }
+    };
+    nav.onclick = function() {
+        if (nav.classList.contains('minimized')) {
+            nav.classList.remove('minimized');
+            minBtn.innerHTML = '➖';
+            minBtn.title = '收起目录';
+        }
+    };
+    nav.appendChild(minBtn);
 
+    // 导航按钮组
+    const navGroup = document.createElement('div');
+    navGroup.className = 'nav-btns';
+    
+    const homeBtn = document.createElement('a');
+    homeBtn.href = '../index.html';
+    homeBtn.className = 'home-btn';
+    homeBtn.innerHTML = '🏠 首页';
+    navGroup.appendChild(homeBtn);
 
+    const categoryBtn = document.createElement('a');
+    categoryBtn.href = '../category.html';
+    categoryBtn.className = 'category-btn';
+    categoryBtn.innerHTML = '🏷️ 分类';
+    navGroup.appendChild(categoryBtn);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const aboutBtn = document.createElement('a');
+    aboutBtn.href = '../about.html';
+    aboutBtn.className = 'about-btn';
+    aboutBtn.innerHTML = 'ℹ️ 关于';
+    navGroup.appendChild(aboutBtn);
+    
+    nav.appendChild(navGroup);
+    
+    // 目录标题
+    const tocTitle = document.createElement('h3');
+    tocTitle.innerText = '文章目录';
+    nav.appendChild(tocTitle);
+    
+    // 生成目录
+    const headers = document.querySelectorAll('h1, h2, h3');
+    const ul = document.createElement('ul');
+    headers.forEach((h, index) => {
+        // 跳过主标题如果不希望它在目录里，这里全包含
+        if (!h.id) h.id = 'heading-' + index;
+        const li = document.createElement('li');
+        // 根据标题级别缩进
+        const level = parseInt(h.tagName[1]) - 1;
+        li.style.marginLeft = (level * 15) + 'px';
+        
+        const a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.className = 'toc-link';
+        // 使用 innerHTML 使得数学公式（如 KaTeX 生成的 span）能在目录中正常渲染显示
+        a.innerHTML = h.innerHTML;
+        li.appendChild(a);
+        ul.appendChild(li);
+    });
+    
+    if (headers.length > 0) {
+        nav.appendChild(ul);
+    } else {
+        const noToc = document.createElement('p');
+        noToc.style.fontSize = '12px';
+        noToc.style.color = '#999';
+        noToc.textContent = '暂无目录';
+        nav.appendChild(noToc);
+    }
+    
+    document.body.appendChild(nav);
+});
+</script>
 
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -398,357 +635,6 @@ sidebarTOCBtn.addEventListener('click', function(event) {
     document.body.setAttribute('html-show-sidebar-toc', true)
   }
 })
-</script>
-      
-  
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- INJECTED_NAV_TOC -->
-
-<!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
-<script>
-MathJax = {
-    tex: {
-        inlineMath: [['$', '$'], ['\(', '\)']],
-        displayMath: [['$$', '$$'], ['\[', '\]']],
-        processEscapes: true,
-        packages: {'[+]': ['ams', 'physics']},
-    },
-    loader: {
-        load: ['ui/lazy']
-    },
-};
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
-
-<!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
-<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-
-/* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
-mjx-container[display="true"], .MathJax_Display {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    max-width: 100%;
-    padding-bottom: 0.5em; /* 防止滚动条遮挡公式底部的下标 */
-    
-    /* 隐藏滚动条本身，但保留滑动/滚动功能 */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
-}
-mjx-container[display="true"]::-webkit-scrollbar, 
-.MathJax_Display::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
-}
-
-/* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
-body, .markdown-preview.markdown-preview, .markdown-preview {
-    font-size: 20px;
-    line-height: 1.6;
-    font-family: "Source Han Serif SC VF Regular", "Noto Serif SC", serif;
-    font-weight: 500; /* 全局统一使用 Medium 字重 */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* 悬浮导航与目录样式 */
-.custom-floating-nav {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 280px;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    padding: 15px;
-    z-index: 9999;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-.custom-floating-nav.minimized {
-    width: 48px;
-    height: 48px;
-    min-height: 48px;
-    border-radius: 50%;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-.custom-floating-nav.minimized > *:not(.nav-minimize-btn) {
-    display: none !important;
-}
-.custom-floating-nav .nav-minimize-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    color: #888;
-    padding: 4px;
-    line-height: 1;
-    border-radius: 4px;
-}
-.custom-floating-nav .nav-minimize-btn:hover {
-    color: #333;
-    background: #f0f0f0;
-}
-.custom-floating-nav.minimized .nav-minimize-btn {
-    position: static;
-    font-size: 24px;
-    color: #228ae6;
-    background: transparent;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.custom-floating-nav .nav-btns {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    width: 100%;
-}
-.custom-floating-nav .home-btn, .custom-floating-nav .about-btn, .custom-floating-nav .category-btn {
-    flex: 1;
-    background: #228ae6;
-    color: #fff;
-    padding: 8px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    transition: background 0.2s;
-    box-sizing: border-box;
-}
-.custom-floating-nav .home-btn:hover { background: #1b6ec2; }
-.custom-floating-nav .category-btn { background: #f06595; }
-.custom-floating-nav .category-btn:hover { background: #d6336c; }
-.custom-floating-nav .about-btn { background: #40c057; }
-.custom-floating-nav .about-btn:hover { background: #2f9e44; }
-.custom-floating-nav h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-.custom-floating-nav ul {
-    list-style: none;
-    padding-left: 15px;
-    margin: 0;
-}
-.custom-floating-nav > ul {
-    padding-left: 0;
-}
-.custom-floating-nav a.toc-link {
-    text-decoration: none;
-    color: #555;
-    display: block;
-    padding: 4px 0;
-    font-size: 14px;
-    line-height: 1.4;
-    transition: color 0.2s;
-}
-.custom-floating-nav a.toc-link:hover {
-    color: #228ae6;
-}
-/* 响应式，小屏幕下隐藏较长的目录，将返回主页变成底部悬浮按钮 */
-@media (max-width: 1200px) {
-    .custom-floating-nav.minimized {
-        bottom: 30px;
-        right: 20px;
-        top: auto;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        background: #ffffff;
-        border: 1px solid #e0e0e0;
-    }
-    .custom-floating-nav {
-        top: auto;
-        bottom: 30px;
-        right: 20px;
-        width: auto;
-        padding: 0;
-        border: none;
-        box-shadow: none;
-        background: transparent;
-    }
-    .custom-floating-nav h3,
-    .custom-floating-nav ul,
-    .custom-floating-nav p {
-        display: none; /* 手机上隐藏目录主体 */
-    }
-    .custom-floating-nav .nav-btns {
-        margin-bottom: 0;
-        width: auto;
-    }
-    .custom-floating-nav .home-btn, .custom-floating-nav .about-btn, .custom-floating-nav .category-btn {
-        padding: 12px 20px;
-        border-radius: 50px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        font-size: 16px;
-    }
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    if (document.querySelector('.custom-floating-nav')) return;
-    
-    const nav = document.createElement('div');
-    nav.className = 'custom-floating-nav';
-    
-    // 最小化按钮
-    const minBtn = document.createElement('button');
-    minBtn.className = 'nav-minimize-btn';
-    minBtn.innerHTML = '➖';
-    minBtn.title = '收起目录';
-    minBtn.onclick = function(e) {
-        e.stopPropagation();
-        if (nav.classList.contains('minimized')) {
-            nav.classList.remove('minimized');
-            minBtn.innerHTML = '➖';
-            minBtn.title = '收起目录';
-        } else {
-            nav.classList.add('minimized');
-            minBtn.innerHTML = '📑';
-            minBtn.title = '展开目录';
-        }
-    };
-    nav.onclick = function() {
-        if (nav.classList.contains('minimized')) {
-            nav.classList.remove('minimized');
-            minBtn.innerHTML = '➖';
-            minBtn.title = '收起目录';
-        }
-    };
-    nav.appendChild(minBtn);
-
-    // 导航按钮组
-    const navGroup = document.createElement('div');
-    navGroup.className = 'nav-btns';
-    
-    const homeBtn = document.createElement('a');
-    homeBtn.href = '../index.html';
-    homeBtn.className = 'home-btn';
-    homeBtn.innerHTML = '🏠 首页';
-    navGroup.appendChild(homeBtn);
-
-    const categoryBtn = document.createElement('a');
-    categoryBtn.href = '../category.html';
-    categoryBtn.className = 'category-btn';
-    categoryBtn.innerHTML = '🏷️ 分类';
-    navGroup.appendChild(categoryBtn);
-
-    const aboutBtn = document.createElement('a');
-    aboutBtn.href = '../about.html';
-    aboutBtn.className = 'about-btn';
-    aboutBtn.innerHTML = 'ℹ️ 关于';
-    navGroup.appendChild(aboutBtn);
-    
-    nav.appendChild(navGroup);
-    
-    // 目录标题
-    const tocTitle = document.createElement('h3');
-    tocTitle.innerText = '文章目录';
-    nav.appendChild(tocTitle);
-    
-    // 生成目录
-    const headers = document.querySelectorAll('h1, h2, h3');
-    const ul = document.createElement('ul');
-    headers.forEach((h, index) => {
-        // 跳过主标题如果不希望它在目录里，这里全包含
-        if (!h.id) h.id = 'heading-' + index;
-        const li = document.createElement('li');
-        // 根据标题级别缩进
-        const level = parseInt(h.tagName[1]) - 1;
-        li.style.marginLeft = (level * 15) + 'px';
-        
-        const a = document.createElement('a');
-        a.href = '#' + h.id;
-        a.className = 'toc-link';
-        // 使用 innerHTML 使得数学公式（如 KaTeX 生成的 span）能在目录中正常渲染显示
-        a.innerHTML = h.innerHTML;
-        li.appendChild(a);
-        ul.appendChild(li);
-    });
-    
-    if (headers.length > 0) {
-        nav.appendChild(ul);
-    } else {
-        const noToc = document.createElement('p');
-        noToc.style.fontSize = '12px';
-        noToc.style.color = '#999';
-        noToc.textContent = '暂无目录';
-        nav.appendChild(noToc);
-    }
-    
-    document.body.appendChild(nav);
-});
 </script>
 
 <!-- Giscus 评论区容器及资源引入 -->
