@@ -93,6 +93,8 @@
 
 
 
+
+
       <!-- tags: Understanding Analysis -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2078,12 +2080,14 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
 <!-- INJECTED_NAV_TOC -->
 
 <!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
 <script>
 MathJax = {
-    tex: {
+    tex:  {
         inlineMath: [['$', '$'], ['\(', '\)']],
         displayMath: [['$$', '$$'], ['\[', '\]']],
         processEscapes: true,
@@ -2102,8 +2106,9 @@ MathJax = {
     loader: {
       // 只加载必需的组件，不加载菜单、a11y
       load: ['input/tex-base', 'output/chtml']
+        }
     }
-  };
+};
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>

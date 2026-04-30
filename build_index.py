@@ -113,7 +113,7 @@ def enhance_post(file_path, post_title=None):
 <!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
 <script>
 MathJax = {
-    tex: {
+    tex:  {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
@@ -132,8 +132,9 @@ MathJax = {
     loader: {
       // 只加载必需的组件，不加载菜单、a11y
       load: ['input/tex-base', 'output/chtml']
+        }
     }
-  };
+};
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
