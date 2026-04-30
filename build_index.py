@@ -119,13 +119,6 @@ MathJax = {
         processEscapes: true,
         packages: {'[+]': ['ams', 'physics']},
     },
-    loader: {
-        load: ['ui/lazy']
-    },
-    lazy: {
-        // 关键！在距离视口 800px 时就提前渲染，首屏公式会被立刻处理
-        threshold: 800
-    },
 };
 </script>
 
@@ -138,6 +131,18 @@ MathJax = {
 <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+
+/* 整个页面的内容区域启用懒绘制（跳过离屏区域的像素渲染） */
+body {
+    content-visibility: auto;
+    contain-intrinsic-size: 100vw 2000px; /* 估算高度，避免滚动条剧烈跳动 */
+}
+
+/* MathJax 公式容器也继承这一特性，并优化固有尺寸占位 */
+.MathJax_SVG_Display, .MathJax_Display, .MathJax_SVG, .MathJax {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 30px; /* 单个公式高度占位 */
+}
 
 /* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
 mjx-container[display="true"], .MathJax_Display {
