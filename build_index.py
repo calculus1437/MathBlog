@@ -122,6 +122,10 @@ MathJax = {
     loader: {
         load: ['ui/lazy']
     },
+    lazy: {
+        // 关键！在距离视口 800px 时就提前渲染，首屏公式会被立刻处理
+        threshold: 800
+    },
 };
 </script>
 

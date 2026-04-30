@@ -80,6 +80,9 @@
 
 
 
+
+
+
 <!-- tags: 小甜点 -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -387,6 +390,9 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
+
 <!-- INJECTED_NAV_TOC -->
 
 <!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
@@ -400,6 +406,10 @@ MathJax = {
     },
     loader: {
         load: ['ui/lazy']
+    },
+    lazy: {
+        // 关键！在距离视口 800px 时就提前渲染，首屏公式会被立刻处理
+        threshold: 800
     },
 };
 </script>
