@@ -120,33 +120,21 @@ MathJax = {
         packages: {'[+]': ['ams', 'physics']},
     },
     loader: {
-        load: ['input/tex', 'output/chtml', 'ui/lazy']
+        load: ['ui/lazy']
     },
 };
 </script>
 
-<script>
-// 预加载常用公式，提升首屏渲染速度
-MathJax.startup.registerConstructor('preload', (startup) => {
-  return {
-    preload() {
-      return MathJax.tex2chtmlPromise('\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}');
-    }
-  };
-});
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
+"""
 
-const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          MathJax.typesetPromise([entry.target]);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold: 0.1});
-    
-</script>
-
+        injected_html = """
+<!-- INJECTED_NAV_TOC -->
+""" + new_mathjax_script + """
+<!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
+<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+
 /* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
 mjx-container[display="true"], .MathJax_Display {
     overflow-x: auto !important;
@@ -162,21 +150,6 @@ mjx-container[display="true"]::-webkit-scrollbar,
 .MathJax_Display::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge */
 }
-</style>
-
-// 引入 MathJax 4 的 CDN
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" defer></script>
-"""
-
-        injected_html = """
-<!-- INJECTED_NAV_TOC -->
-""" + new_mathjax_script + """
-<!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
-<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-
-
-
 
 /* 覆盖 Markdown 默认字体，仅在本地思源宋体和分包在线字体中选择 */
 body, .markdown-preview.markdown-preview, .markdown-preview {
