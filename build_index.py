@@ -142,7 +142,8 @@ const observer = new IntersectionObserver((entries) => {
     }, {threshold: 0.1});
     
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
+<!-- 使用 ../ 返回到根目录来加载 mathjax -->
+<script src="../mathjax/tex-chtml.js" defer></script>
 """
 
         injected_html = """
