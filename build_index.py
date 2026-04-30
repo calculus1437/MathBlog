@@ -130,7 +130,7 @@ MathJax = {
 };
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml-nofont.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
 """
 
         injected_html = """
