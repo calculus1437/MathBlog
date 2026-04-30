@@ -8,7 +8,6 @@
 !.vscode/
 !images/
 !posts/
-!mathjax/
 
 # 保留根目录下的特定文件
 !build_index.py
