@@ -23,7 +23,7 @@
 
 [giscus](https://giscus.app/zh-CN)，现在使用的评论区系统。
 
-Gemini 3.1 Pro，提供了几乎所有网站源代码的编写与调试工作。
+之前用 Giuhub Copilot 进行编写，26 年 Copilot 遭到数次大砍，现在改为我纯手写了。
 
 ## 网站源码
 https://github.com/calculus1437/calculus1437.github.io

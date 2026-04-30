@@ -116,12 +116,22 @@ MathJax = {
     tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
+        processEscapes: true,
+        packages: {'[+]': ['ams', 'physics']},
     },
     loader: {
         load: ['input/tex', 'output/chtml', 'ui/lazy']
     },
 };
+// 预加载常用公式，提升首屏渲染速度
+MathJax.startup.registerConstructor('preload', (startup) => {
+  return {
+    preload() {
+      return MathJax.tex2chtmlPromise('\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}');
+    }
+  };
+});
+
 const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
