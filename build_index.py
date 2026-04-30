@@ -112,22 +112,18 @@ def enhance_post(file_path, post_title=None):
             new_mathjax_script = """
 <!-- 引入支持按需懒渲染的 MathJax 3 引擎，成倍提升数百个公式的长文档渲染速度 -->
 <script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$','$'], ['\\\\(','\\\\)']],
-    displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
-    processEscapes: true
-  },
-  options: {
-    processScroll: true // 开启滚动监听，自动渲染进入视口的公式，离开视口的公式则卸载释放资源
-    enableMenu: true, // 恢复右键菜单，允许复制公式代码
-    a11y: { disable: true }, // 顺手关掉无障碍朗读模块，抵消开启菜单带来的小部分性能损耗
-    ignoreHtmlClass: 'tex2jax_ignore',
-    processHtmlClass: 'tex2jax_process'
-  }
-};
+MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+    },
+    loader: {
+        load: ['input/tex', 'output/chtml', 'ui/lazy']
+    },
+    };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
 """
 
         injected_html = """
