@@ -96,6 +96,8 @@
 
 
 
+
+
       <!-- tags: Understanding Analysis -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2084,6 +2086,8 @@ sidebarTOCBtn.addEventListener('click', function(event) {
 
 
 
+
+
 <!-- INJECTED_NAV_TOC -->
 
 <!-- 引入支持按需懒渲染的 MathJax 4 引擎，成倍提升数百个公式的长文档渲染速度 -->
@@ -2094,17 +2098,6 @@ MathJax = {
         displayMath: [['$$', '$$'], ['\[', '\]']],
         processEscapes: true,
         packages: {'[+]': ['ams']},
-    output: {
-      font: 'mathjax-tex' // 用回 v3 风格的原始 TeX 字体，去掉了 newcm 的多文件拖累
-    },
-    options: {
-      // 彻底禁止菜单和无障碍相关渲染动作
-      renderActions: {
-        addMenu: [],
-        enrich: [],
-        attachSpeech: []
-      }
-    },
     loader: {
       // 只加载必需的组件，不加载菜单、a11y
       load: ['input/tex-base', 'output/chtml']
@@ -2119,21 +2112,14 @@ MathJax = {
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 
-mjx-container {
-  content-visibility: auto;
-  contain-intrinsic-size: 0px 30px;   /* 估计每个公式高度 30px */
-}
-
 /* 整个页面的内容区域启用懒绘制（跳过离屏区域的像素渲染） */
 body {
     content-visibility: auto;
-    contain-intrinsic-size: 100vw 2000px; /* 估算高度，避免滚动条剧烈跳动 */
 }
 
 /* MathJax 公式容器也继承这一特性，并优化固有尺寸占位 */
 .MathJax_SVG_Display, .MathJax_Display, .MathJax_SVG, .MathJax {
     content-visibility: auto;
-    contain-intrinsic-size: 1px 30px; /* 单个公式高度占位 */
 }
 
 /* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
@@ -2141,7 +2127,6 @@ mjx-container[display="true"], .MathJax_Display {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     max-width: 100%;
-    padding-bottom: 0.5em; /* 防止滚动条遮挡公式底部的下标 */
     
     /* 隐藏滚动条本身，但保留滑动/滚动功能 */
     scrollbar-width: none; /* Firefox */
