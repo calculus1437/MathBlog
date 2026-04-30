@@ -67,45 +67,17 @@ def enhance_post(file_path, post_title=None):
             flags=re.IGNORECASE
         )
         
-        # 恢复使用稳定且不限制 CORS 的 cdnjs 或者 unpkg，避免 staticfile 的加载/阻塞问题
-        new_content = re.sub(
-            r'href="file:///[^"]+katex\.min\.css"',
-            r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
-            new_content
-        )
-        new_content = re.sub(
-            r'href="https://cdn\.staticfile\.net/KaTeX/0\.16\.8/katex\.min\.css"',
-            r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
-            new_content
-        )
-        new_content = re.sub(
-            r'href="https://cdn\.jsdelivr\.net/npm/katex@0\.16\.8/dist/katex\.min\.css"',
-            r'href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"',
-            new_content
-        )
-        
-        # 移除已有的 MathJax
-        new_content = re.sub(
-            r'<script[^>]*src="[^"]*mathjax[^"]*"[^>]*></script>',
-            '',
-            new_content,
-            flags=re.IGNORECASE
-        )
-        # 移除旧的配置 script
-        new_content = re.sub(
-            r'<script type="text/x-mathjax-config">.*?</script>',
-            '',
-            new_content,
-            flags=re.DOTALL
-        )
+        # 统一清理所有旧版的 KaTeX 和 MathJax 引用
+        new_content = re.sub(r'<link[^>]*href="[^"]*katex\.min\.css"[^>]*>', '', new_content, flags=re.IGNORECASE)
+        new_content = re.sub(r'<script[^>]*src="[^"]*mathjax[^"]*"[^>]*></script>', '', new_content, flags=re.IGNORECASE)
+        new_content = re.sub(r'<script type="text/x-mathjax-config">.*?</script>', '', new_content, flags=re.DOTALL)
 
         # 让已注入的页面也能重新更新！把之前注入的统统去掉，重新插入
         if '<!-- INJECTED_NAV_TOC -->' in new_content:
             new_content = new_content.split('<!-- INJECTED_NAV_TOC -->')[0] + '</body>'
 
-        # 注入的 HTML/JS/CSS（已移除对国内访问较慢的外部字体链接，使用系统原生字体栈即刻渲染）
+        # 注入的 HTML/JS/CSS
         katex_script = """
-<!-- 使用 KaTeX 全局渲染数学公式 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\\\[', right: '\\\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\\\(', right: '\\\\)', display: false}], throwOnError: false});"></script>
@@ -114,10 +86,8 @@ def enhance_post(file_path, post_title=None):
         injected_html = """
 <!-- INJECTED_NAV_TOC -->
 """ + katex_script + """
-<!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
 <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-
 /* 允许过长的数学公式出现横向滚动条，避免被页面边缘裁切 */
 .katex-display {
     overflow-x: auto !important;
@@ -506,7 +476,6 @@ def build_index():
     <title>{SITE_CONFIG.get('title', "calculus_1437's Math Notes")}</title>
     <meta name="description" content="纯净的 HTML 数学笔记博客 | calculus_1437's Math Notes">
     <meta name="keywords" content="calculus1437, calculus_1437, understanding analysis, understanding analysis solutions">
-    <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {{
@@ -846,9 +815,7 @@ def build_about():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于 - {SITE_CONFIG.get('title', 'calculus_1437''s Math Notes')}</title>
-    <!-- 引入分包按需加载的思源宋体 (Noto Serif SC) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- KaTeX 支持 (解决公式渲染) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
     <style>
         :root {{
