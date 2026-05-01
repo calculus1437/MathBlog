@@ -411,10 +411,6 @@ def get_html_tags(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
             # 2. 从 meta keywords 提取
-            match_meta = re.search(r'<meta\s+name="keywords"\s+content="(.*?)">', content, re.IGNORECASE)
-            if match_meta:
-                keywords = [k.strip() for k in match_meta.group(1).split(',') if k.strip()]
-                tags.extend(keywords)
             # 3. 从 HTML 注释提取 <!-- tags: tag1, tag2 -->
             match_comment = re.search(r'<!--\s*tags?:\s*(.*?)\s*-->', content, re.IGNORECASE)
             if match_comment:
