@@ -1,0 +1,44 @@
+:root {  /* 颜色变量定义 */
+    --bg-color: #f8f9fa;
+    --text-color: #333;
+    --link-color: #228ae6;
+    --link-hover: #1b6ec2;
+    --date-color: #868e96;
+    --border-color: #dee2e6;
+}
+@font-face {
+    font-family: "MathFont";
+    src: url("../fonts/mediumsubset.woff2") format("truetype-variations");
+    font-weight: 1 999;
+    font-display: swap;
+}
+
+.site-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #212529;
+}
+.description {
+    color: var(--date-color);
+    font-size: 1.1rem;
+}
+body {
+    /* 使用字体子集减少加载速度 */
+    font-family: "MathFont";
+    font-weight: 500; /* 全局统一使用 Medium 字重 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
