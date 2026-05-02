@@ -30,7 +30,7 @@ h1 {
 }
 body {
     /* 使用字体子集减少加载速度 */
-    font-family: "Noto Serif SC", "Arial", "SimSun", "Songti SC", "宋体";
+    font-family: "MathFont";
     font-weight: 500; /* 全局统一使用 Medium 字重 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
