@@ -1,6 +1,0 @@
-name = "blogtest"
-main = "index.html"   # 这里只是一个占位，实际上我们下面主要用 assets
-
-[assets]
-directory = "."       # 你的静态文件所在的目录（根目录）
-binding = "ASSETS"
