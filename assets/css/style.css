@@ -6,12 +6,6 @@
     --date-color: #868e96;
     --border-color: #dee2e6;
 }
-@font-face {
-    font-family: "MathFont";
-    src: url("../fonts/mediumsubset.woff2") format("truetype-variations");
-    font-weight: 1 999;
-    font-display: swap;
-}
 
 .site-header {
     text-align: center;
@@ -30,7 +24,7 @@ h1 {
 }
 body {
     /* 使用字体子集减少加载速度 */
-    font-family: "MathFont";
+    font-family: "Noto Serif SC";
     font-weight: 500; /* 全局统一使用 Medium 字重 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
