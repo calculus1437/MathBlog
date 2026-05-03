@@ -1,0 +1,30 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculus_1437's Math Notes</title>
+    <!-- 1. CSS 样式 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+
+    <!-- 2. KaTeX 核心库 -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+
+    <!-- 3. 自动渲染扩展 -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+
+    <!-- 4. 初始化，设置你的公式分隔符 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},   // 行间公式
+                    {left: '$', right: '$', display: false},    // 行内公式
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ]
+            });
+        });
+    </script>
+    <link href="assets/fonts/NotoSerifSC-VF/result.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="icon" type="image/jpg" href="assets/images/avatar.jpg"/>
+</head>
