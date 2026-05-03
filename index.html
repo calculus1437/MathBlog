@@ -4,12 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>calculus_1437's Math Notes</title>
-    <link href=assets\fonts\NotoSerifSC-VF\result.css rel="stylesheet">
+    <link href="assets/fonts/NotoSerifSC-VF/result.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css"/>
-    <link rel="icon" type="image/jpg" href="assets\images\avatar.jpg"/>
+    <link rel="icon" type="image/jpg" href="assets/images/avatar.jpg"/>
+    <script src="assets\fonts\mathjax\tex-svg.js" defer></script>
+    <script>
+window.MathJax = {
+    loader: {
+        load: ['input/tex', 'output/svg']
+    },
+    sre: {
+        disable: true   // 禁用语音规则引擎
+    },
+};
+</script>
 </head>
 
-<body> 
+<body>
     <header class="site-header">
         <h1>calculus_1437's Math Notes</h1>
         <p class="description">纯净的 HTML 数学笔记网站</p>
@@ -22,4 +33,11 @@
     Cloudflare Pages 托管完成，提升加载速度。<br/>
     思源宋体分包完成，对加载速度有很大提升。<br/>
     head，footer样式模块化（进行中）。<br/>
+    公式测试：<br/>
+    <div id="mathjax-container">
+	\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+    \[ \sum_{n=1}^{\infty}\frac{1}{n^s} \]
+    \[ \int_0^{\infty}t^{s-1}e^{-t}dt\]
+    \[ G\times V \rightarrow V : (g,x)\mapsto gx\]
+  </div>
 </body>
