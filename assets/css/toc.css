@@ -1,0 +1,118 @@
+/* 悬浮导航容器 */
+.custom-floating-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px;
+    font-family: "Noto Serif SC";
+    font-weight: 500; /* 全局统一使用 Medium 字重 */
+}
+
+/* 最小化按钮 */
+.custom-floating-nav.minimized {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+    .custom-floating-nav.minimized > *:not(.nav-minimize-btn) {
+        display: none !important;
+    }
+
+    .nav-minimize-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        color: #888;
+        padding: 4px;
+        line-height: 1;
+        border-radius: 4px;
+    }
+        .custom-floating-nav.minimized .nav-minimize-btn {
+            position: static;
+            font-size: 24px;
+            color: #228ae6;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-floating-nav .nav-minimize-btn:hover {
+        color: #333;
+        background: #f0f0f0;
+    }
+
+.nav-btns {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* 主页按钮 */
+.home-btn {
+    flex: 1;
+    background: #228ae6;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.2s;
+}
+    .custom-floating-nav .home-btn:hover {
+    background-color: #228ae6;   /* 背景色不变，或可略深一点点 */
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.5),    /* 内圈白晕，柔和 */
+                0 0 20px 4px rgba(34, 138, 230, 0.5); /* 外圈蓝色光晕 */
+    transition: all 0.25s ease;
+    color: #fff;
+    text-decoration: none;
+}
+
+.custom-floating-nav h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.custom-floating-nav ul {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+.custom-floating-nav a.toc-link {
+    text-decoration: none;
+    color: #555;
+    display: block;
+    padding: 4px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+.custom-floating-nav a.toc-link:hover {
+    color: #228ae6;
+}
