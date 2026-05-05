@@ -10,17 +10,17 @@ BACKUP_DIR = Path("posts_backup")
 # 检测 HEAD 中是否已包含以下内容，如果缺失则添加（注意保持缩进风格）
 NEW_HEAD_CONTENT_LINES = [
     '<link href="../assets/fonts/NotoSerifSC-VF/result.css" rel="stylesheet">',
-    '<link rel="stylesheet" href="assets/css/style.css">',
+    '<link rel="stylesheet" href="../assets/css/style.css">',
     '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css">',
     '<link href="../assets/css/toc.css"  rel=stylesheet>',
     '<script src="../assets/js/lazy.js" defer></script>',
     '<script src="../assets/js/toc.js" defer></script>',
-    '<link rel="icon" type="image/jpg" href="assets/images/avatar.jpg">'
+    '<link rel="icon" type="image/jpg" href="../assets/images/avatar.jpg">'
 ]
 
 
 # 脚注 HTML（注意缩进）
-FOOTER_HTML = '''    <footer style="text-align: center; margin-top: 3rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid var(--border-color);">
+FOOTER_HTML = '''    <footer>
         Copyright 2026 HuangTianye 版权所有
     </footer>'''
 # =======================================
@@ -85,7 +85,7 @@ def replace_head_links(content):
 
 def add_footer(content):
     # 要替换成的完整结尾（注意保留换行和缩进）
-    new_ending = '''    <footer style="text-align: center; margin-top: 3rem; padding: 1.5rem 0; color: #868e96; font-size: 0.9rem; border-top: 1px solid var(--border-color);">
+    new_ending = '''    <footer>
         Copyright 2026 HuangTianye 版权所有
     </footer>
 

@@ -10,4 +10,6 @@ footer {
     color: #868e96;
     font-size: 0.9rem;
     border-top: 1px solid var(--border-color);
+    font-family: "Noto Serif SC";
+    font-weight: 500; 
 }
