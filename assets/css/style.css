@@ -1,5 +1,13 @@
-body{
+body {
         /* 使用字体子集减少加载速度 */
     font-family: "Noto Serif SC";
     font-weight: 500; /* 全局统一使用 Medium 字重 */
+}
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    color: #868e96;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
 }
